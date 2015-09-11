@@ -3,6 +3,8 @@
  * 
  * GARB - GERADOR DE ARQUIVOS DE REMESSA BRADESCO
  * 
+ * @author Thiago Henrique
+ * 
  * PATA TESTE
  * Para a realização do teste, poderá ser transmitido quantos Arquivos Remessa lhes convier,
  * porém, gravados com todos os dados fictícios, exigidos no Lay-out, e deverá conter no

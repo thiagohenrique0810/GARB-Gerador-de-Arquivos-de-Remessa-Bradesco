@@ -424,28 +424,45 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $razao_conta_corrente
 	 */
 	public function setRazao_conta_corrente($razao_conta_corrente) {
-		$this->razao_conta_corrente = $razao_conta_corrente;
+		if($this->valid_tamanho_campo($razao_conta_corrente, 5) && is_numeric($razao_conta_corrente)) {
+			$this->razao_conta_corrente = $razao_conta_corrente;
+		}else {
+			throw new Exception('Error: Quantidade do digito excedido ou não é numerico.');
+		}
 	}
 
 	/**
 	 * @param field_type $conta_corrente
 	 */
 	public function setConta_corrente($conta_corrente) {
-		$this->conta_corrente = $conta_corrente;
+		if($this->valid_tamanho_campo($conta_corrente, 7)) {
+			$this->conta_corrente = $conta_corrente;
+		}else {
+			throw new Exception('Error: Informações sobre o numero da conta corrente invalido..');
+		}
+		
 	}
 
 	/**
 	 * @param field_type $digito_conta_corrente
 	 */
 	public function setDigito_conta_corrente($digito_conta_corrente) {
-		$this->digito_conta_corrente = $digito_conta_corrente;
+		if($this->valid_tamanho_campo($digito_conta_corrente, 1)) {
+			$this->digito_conta_corrente = $digito_conta_corrente;
+		}else {
+			throw new Exception('Error: Informações sobre o numero da conta corrente invalido..');
+		}
 	}
 
 	/**
 	 * @param field_type $identificacao_empresa_benificiario_banco
 	 */
 	public function setIdentificacao_empresa_benificiario_banco($identificacao_empresa_benificiario_banco) {
-		$this->identificacao_empresa_benificiario_banco = $identificacao_empresa_benificiario_banco;
+		if($this->valid_tamanho_campo($identificacao_empresa_benificiario_banco, 17) && is_numeric($identificacao_empresa_benificiario_banco)) {
+			$this->identificacao_empresa_benificiario_banco = $identificacao_empresa_benificiario_banco;
+		}else {
+			throw new Exception('Error: Informações sobre a indentificação de empresa benificiario estão invalidos..');
+		}
 	}
 
 	/**
