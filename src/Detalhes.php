@@ -458,46 +458,70 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $identificacao_empresa_benificiario_banco
 	 */
 	public function setIdentificacao_empresa_benificiario_banco($identificacao_empresa_benificiario_banco) {
-		if($this->valid_tamanho_campo($identificacao_empresa_benificiario_banco, 17) && is_numeric($identificacao_empresa_benificiario_banco)) {
-			$this->identificacao_empresa_benificiario_banco = $identificacao_empresa_benificiario_banco;
+		if($this->valid_tamanho_campo($identificacao_empresa_benificiario_banco, 17)) {
+			$this->identificacao_empresa_benificiario_banco = '0' . $identificacao_empresa_benificiario_banco;
 		}else {
 			throw new Exception('Error: Informações sobre a indentificação de empresa benificiario estão invalidos..');
 		}
 	}
 
 	/**
+	 * semelhante ao numero do documento - pode ser uma chave unica de identificação de cada boleto da remessa
 	 * @param field_type $numero_controle_participante
 	 */
 	public function setNumero_controle_participante($numero_controle_participante) {
-		$this->numero_controle_participante = $numero_controle_participante;
+		if($this->valid_tamanho_campo($numero_controle_participante, 25)) {
+			$this->numero_controle_participante = $numero_controle_participante;
+		}else {
+			throw new Exception('Error - Dados do numero de controle do participante estãos incorretos');
+		}
 	}
 
 	/**
-	 * @param field_type $codigo_banco_debito_compensacao
+	 * se existir debito automatico para o beneficiario, deverá ser passado como parametro TRUE
+	 * @param string $codigo_banco_debito_compensacao
 	 */
-	public function setCodigo_banco_debito_compensacao($codigo_banco_debito_compensacao) {
-		$this->codigo_banco_debito_compensacao = $codigo_banco_debito_compensacao;
+	public function setCodigo_banco_debito_compensacao($codigo_banco_debito_compensacao = false) {
+		if($codigo_banco_debito_compensacao == true) {
+			$this->codigo_banco_debito_compensacao = '237';
+		}else {
+			$this->codigo_banco_debito_compensacao = '000';
+		}
 	}
 
 	/**
+	 * habilita o campo para receber a porcentagem de multas por atraso de pagamento
 	 * @param field_type $campo_multa
 	 */
-	public function setCampo_multa($campo_multa) {
-		$this->campo_multa = $campo_multa;
+	public function setCampo_multa($campo_multa = true) {
+		if($campo_multa == true) {
+			$this->campo_multa = 2;
+		}else {
+			$this->campo_multa = '0';
+		}
 	}
 
 	/**
 	 * @param field_type $percentual_multa
 	 */
 	public function setPercentual_multa($percentual_multa) {
-		$this->percentual_multa = $percentual_multa;
+		if($this->getCampo_multa() == true && is_numeric($percentual_multa) && $this->valid_tamanho_campo($percentual_multa, 4)) {
+			$this->percentual_multa = $percentual_multa;
+		}else {
+			$this->percentual_multa = '0000';
+		}
 	}
 
 	/**
+	 * campo de NOSSO NUMERO, identificador unico para cada boleto gerado
 	 * @param field_type $identificacao_titulo_banco
 	 */
 	public function setIdentificacao_titulo_banco($identificacao_titulo_banco) {
-		$this->identificacao_titulo_banco = $identificacao_titulo_banco;
+		if($this->valid_tamanho_campo($identificacao_titulo_banco, 11) && is_numeric($identificacao_titulo_banco)) {
+			$this->identificacao_titulo_banco = $identificacao_titulo_banco;
+		}else {
+			throw new Exception('Error - Dados do nosso numero estãos incorretos');
+		}
 	}
 
 	/**
