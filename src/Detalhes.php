@@ -42,18 +42,18 @@ class Detalhes extends Funcoes implements IFuncoes {
 	private $desconto_bonificacao_dia;
 	//093 - 093 - 1 - CONSTANTE
 	private $condicao_emissao_papeleta_cobranca = 2; //<--- verificar observações
-	//094 - 094 - 1 - A
-	private $ident_debito_automatico; //<---- ver observações
+	//094 - 094 - 1 - A - CONSTANTE
+	private $ident_debito_automatico = 'N'; //<---- ver observações
 	//095 - 104 - 10 - A
-	private $identificacao_operacao_banco;
+	//PREENCHER ESPAÇOS EM BRANCO
 	//105 - 105 - 1 - A
-	private $indicador_rateio_credito = 'R';
-	//106 - 106 - 1 - N
-	private $enderecamento_aviso_debito; //<---- ver observações 
+	private $indicador_rateio_credito;
+	//106 - 106 - 1 - N - CONSTANTE
+	private $enderecamento_aviso_debito = '0'; //<---- ver observações 
 	//107 - 108 - 2 - A
 	//PREENCHER ESPAÇOS EM BRANCO
-	//109 - 110 - 2 - N
-	private $identificacao_ocorrencia; //<---- ver observações 
+	//109 - 110 - 2 - N - CONSTANTE
+	private $identificacao_ocorrencia = '01'; //<---- ver observações 
 	//111 - 120 - 10 - A
 	private $numero_documento;
 	//121 - 126 - 6 - N
@@ -64,16 +64,16 @@ class Detalhes extends Funcoes implements IFuncoes {
 	private $banco_encarregado_cobranca = "000";
 	//141 - 147 - 5 - N
 	private $agencia_depositaria = "00000";
-	//148 - 149 - 2 - N
-	private $especie_titulo;//<---- ver observações 
+	//148 - 149 - 2 - N - CONSTRANTE
+	private $especie_titulo = '01';//<---- ver observações 
 	//150 - 150 - 1 - A
 	private $identificacao = "N";
 	//151 - 156 - 6 - N
 	private $data_emissao_titulo;
 	//157 -  158 - 2 - N
-	private $instrucao_1;//<---- ver observações 
+	private $instrucao_1 = '00';//<---- ver observações FUNÇÃO INTERESSANTE POIS PODE SER USADA PARA QUE O SISTEMA GERE AUTOMATICAMENTE O PROTESTO DE ACORDO COM O SOLICITADO
 	//159 - 160 - 2 - N
-	private $instrucao_2;//<---- ver observações 
+	private $instrucao_2 = '00';//<---- ver observações 
 	//161 - 173 - 13 - N
 	private $valo_cobrado_dia_atraso;//<---- ver observações 
 	//174 - 179 - 6 - N
@@ -196,38 +196,10 @@ class Detalhes extends Funcoes implements IFuncoes {
 	}
 
 	/**
-	 * @return the $ident_debito_automatico
-	 */
-	public function getIdent_debito_automatico() {
-		return $this->ident_debito_automatico;
-	}
-
-	/**
-	 * @return the $identificacao_operacao_banco
-	 */
-	public function getIdentificacao_operacao_banco() {
-		return $this->identificacao_operacao_banco;
-	}
-
-	/**
 	 * @return the $indicador_rateio_credito
 	 */
 	public function getIndicador_rateio_credito() {
 		return $this->indicador_rateio_credito;
-	}
-
-	/**
-	 * @return the $enderecamento_aviso_debito
-	 */
-	public function getEnderecamento_aviso_debito() {
-		return $this->enderecamento_aviso_debito;
-	}
-
-	/**
-	 * @return the $identificacao_ocorrencia
-	 */
-	public function getIdentificacao_ocorrencia() {
-		return $this->identificacao_ocorrencia;
 	}
 
 	/**
@@ -525,220 +497,263 @@ class Detalhes extends Funcoes implements IFuncoes {
 	}
 
 	/**
+	 * digito verificador do nosso numero
+	 * sendo de responsabilidade de quem ira inserir-lo 
 	 * @param field_type $digito_auto_consferencia_bancaria
 	 */
 	public function setDigito_auto_consferencia_bancaria($digito_auto_consferencia_bancaria) {
-		$this->digito_auto_consferencia_bancaria = $digito_auto_consferencia_bancaria;
+		if($this->valid_tamanho_campo($digito_auto_consferencia_bancaria, 1) && ctype_alnum($digito_auto_consferencia_bancaria)) {
+			$this->digito_auto_consferencia_bancaria = $digito_auto_consferencia_bancaria;
+		}else {
+			throw new Exception('Error - Problemas na verificação do digito verificado do Nosso numero');
+		}
 	}
 
 	/**
+	 * valor de bonificação por dia
 	 * @param field_type $desconto_bonificacao_dia
 	 */
 	public function setDesconto_bonificacao_dia($desconto_bonificacao_dia) {
-		$this->desconto_bonificacao_dia = $desconto_bonificacao_dia;
-	}
-
-	/**
-	 * @param field_type $ident_debito_automatico
-	 */
-	public function setIdent_debito_automatico($ident_debito_automatico) {
-		$this->ident_debito_automatico = $ident_debito_automatico;
-	}
-
-	/**
-	 * @param field_type $identificacao_operacao_banco
-	 */
-	public function setIdentificacao_operacao_banco($identificacao_operacao_banco) {
-		$this->identificacao_operacao_banco = $identificacao_operacao_banco;
+		if($this->valid_tamanho_campo($desconto_bonificacao_dia, 10) && is_numeric($desconto_bonificacao_dia)) {
+			$this->desconto_bonificacao_dia = $desconto_bonificacao_dia;
+		}else {
+			throw new Exception('Error - Dados de valor de desconto de bonificação incorretos.');
+		}
 	}
 
 	/**
 	 * @param string $indicador_rateio_credito
 	 */
 	public function setIndicador_rateio_credito($indicador_rateio_credito) {
-		$this->indicador_rateio_credito = $indicador_rateio_credito;
-	}
-
-	/**
-	 * @param field_type $enderecamento_aviso_debito
-	 */
-	public function setEnderecamento_aviso_debito($enderecamento_aviso_debito) {
-		$this->enderecamento_aviso_debito = $enderecamento_aviso_debito;
-	}
-
-	/**
-	 * @param field_type $identificacao_ocorrencia
-	 */
-	public function setIdentificacao_ocorrencia($identificacao_ocorrencia) {
-		$this->identificacao_ocorrencia = $identificacao_ocorrencia;
+		if($indicador_rateio_credito){
+			$this->indicador_rateio_credito = 'R';
+		}else {
+			$this->indicador_rateio_credito = ' ';
+		}
 	}
 
 	/**
 	 * @param field_type $numero_documento
 	 */
 	public function setNumero_documento($numero_documento) {
-		$this->numero_documento = $numero_documento;
+		if($this->valid_tamanho_campo($numero_documento, 10) && ctype_alnum($numero_documento)) {
+			$this->numero_documento = $numero_documento;
+		}else {
+			throw new Exception('Error - Dados de número do documento estão incorretos.');
+		}
 	}
 
 	/**
 	 * @param field_type $data_vencimento_titulo
 	 */
 	public function setData_vencimento_titulo($data_vencimento_titulo) {
-		$this->data_vencimento_titulo = $data_vencimento_titulo;
+		if($this->valid_tamanho_campo($data_vencimento_titulo, 6) && is_numeric($data_vencimento_titulo)) {
+			$this->data_vencimento_titulo = $data_vencimento_titulo;
+		}else{
+			throw new Exception('Error - Dados da data de vencimento estão incorretos.');
+		}
 	}
 
 	/**
 	 * @param field_type $valor_titulo
 	 */
 	public function setValor_titulo($valor_titulo) {
-		$this->valor_titulo = $valor_titulo;
-	}
-
-	/**
-	 * @param string $banco_encarregado_cobranca
-	 */
-	public function setBanco_encarregado_cobranca($banco_encarregado_cobranca) {
-		$this->banco_encarregado_cobranca = $banco_encarregado_cobranca;
-	}
-
-	/**
-	 * @param string $agencia_depositaria
-	 */
-	public function setAgencia_depositaria($agencia_depositaria) {
-		$this->agencia_depositaria = $agencia_depositaria;
-	}
-
-	/**
-	 * @param field_type $especie_titulo
-	 */
-	public function setEspecie_titulo($especie_titulo) {
-		$this->especie_titulo = $especie_titulo;
-	}
-
-	/**
-	 * @param string $identificacao
-	 */
-	public function setIdentificacao($identificacao) {
-		$this->identificacao = $identificacao;
+		if($this->valid_tamanho_campo($valor_titulo, 13)) {
+			$this->valor_titulo = $this->remove_formatacao_moeda($valor_titulo);
+		}else{
+			throw new Exception('Error - Dados do valor do titulo estão incorretos.');
+		}
 	}
 
 	/**
 	 * @param field_type $data_emissao_titulo
 	 */
 	public function setData_emissao_titulo($data_emissao_titulo) {
-		$this->data_emissao_titulo = $data_emissao_titulo;
-	}
-
-	/**
-	 * @param field_type $instrucao_1
-	 */
-	public function setInstrucao_1($instrucao_1) {
-		$this->instrucao_1 = $instrucao_1;
-	}
-
-	/**
-	 * @param field_type $instrucao_2
-	 */
-	public function setInstrucao_2($instrucao_2) {
-		$this->instrucao_2 = $instrucao_2;
+		if($this->valid_tamanho_campo($data_emissao_titulo, 6) && is_numeric($data_emissao_titulo)) {
+			$this->data_emissao_titulo = $data_emissao_titulo;
+		}else {
+			throw new Exception('Error - Data de emissão de titulo incorreta.');
+		}
 	}
 
 	/**
 	 * @param field_type $valo_cobrado_dia_atraso
 	 */
 	public function setValo_cobrado_dia_atraso($valo_cobrado_dia_atraso) {
-		$this->valo_cobrado_dia_atraso = $valo_cobrado_dia_atraso;
+		if($this->valid_tamanho_campo($valo_cobrado_dia_atraso, 13)) {
+			$this->valo_cobrado_dia_atraso = $this->remove_formatacao_moeda($valo_cobrado_dia_atraso);
+		}else {
+			throw new Exception('Error - Valor cobrado por dia de atraso esta incorreto.');
+		}
 	}
 
 	/**
 	 * @param field_type $data_limite_desconto
 	 */
 	public function setData_limite_desconto($data_limite_desconto) {
-		$this->data_limite_desconto = $data_limite_desconto;
+		if($this->valid_tamanho_campo($data_limite_desconto, 6) && is_numeric($data_limite_desconto)) {
+			$this->data_limite_desconto = $data_limite_desconto;
+		}else {
+			throw new Exception('Error - Data limite de desconto esta incorreta.');
+		}
 	}
 
 	/**
 	 * @param field_type $valor_desconto
 	 */
 	public function setValor_desconto($valor_desconto) {
-		$this->valor_desconto = $valor_desconto;
+		if($this->valid_tamanho_campo($valor_desconto, 13)) {
+			$this->valor_desconto = $this->remove_formatacao_moeda($valor_desconto);
+		}else {
+			throw new Exception('Error - Valor de desconto incorreto.');
+		}
 	}
 
 	/**
 	 * @param field_type $valor_iof
 	 */
 	public function setValor_iof($valor_iof) {
-		$this->valor_iof = $valor_iof;
+		if($this->valid_tamanho_campo($valor_iof, 13)) {
+			$this->valor_iof = $this->remove_formatacao_moeda($valor_iof);
+		}else {
+			throw new Exception('Error - Valor de desconto incorreto.');
+		}
 	}
 
 	/**
 	 * @param field_type $valor_abatimento_concedido_cancelado
 	 */
 	public function setValor_abatimento_concedido_cancelado($valor_abatimento_concedido_cancelado) {
-		$this->valor_abatimento_concedido_cancelado = $valor_abatimento_concedido_cancelado;
+		if($this->valid_tamanho_campo($valor_abatimento_concedido_cancelado)) {
+			$this->valor_abatimento_concedido_cancelado = $this->remove_formatacao_moeda($valor_abatimento_concedido_cancelado);
+		}else {
+			throw new Exception('Error - Valor de desconto incorreto.');
+		}
 	}
 
 	/**
 	 * @param field_type $identificacao_tipo_incricao_pagador
 	 */
 	public function setIdentificacao_tipo_incricao_pagador($identificacao_tipo_incricao_pagador) {
-		$this->identificacao_tipo_incricao_pagador = $identificacao_tipo_incricao_pagador;
+		if($identificacao_tipo_incricao_pagador == 'CPF') {
+			
+			$this->identificacao_tipo_incricao_pagador = '01';
+			
+		}elseif ($identificacao_tipo_incricao_pagador == 'CNPJ') {
+			
+			$this->identificacao_tipo_incricao_pagador = '02';
+			
+		}elseif ($identificacao_tipo_incricao_pagador == 'PIS') {
+			
+			$this->identificacao_tipo_incricao_pagador = '03';
+			
+		}elseif ($identificacao_tipo_incricao_pagador == 'NAO_TEM') {
+			
+			$this->identificacao_tipo_incricao_pagador = '98';
+			
+		}elseif ($identificacao_tipo_incricao_pagador == 'OUTROS') {
+			
+			$this->identificacao_tipo_incricao_pagador = '99';
+			
+		}else {
+			throw new Exception('Error - Valor do tipo de pagador esta incorreto.');
+		}
 	}
 
 	/**
 	 * @param field_type $numero_inscricao_pagador
 	 */
 	public function setNumero_inscricao_pagador($numero_inscricao_pagador) {
-		$this->numero_inscricao_pagador = $numero_inscricao_pagador;
+		if(is_numeric($numero_inscricao_pagador)) {
+			if($this->valid_tamanho_campo($numero_inscricao_pagador, 14)) {
+				$this->numero_inscricao_pagador = $numero_inscricao_pagador;
+			}elseif($this->valid_tamanho_campo($numero_inscricao_pagador, 11)) {
+				$this->numero_inscricao_pagador = $numero_inscricao_pagador;
+			}
+		}else {
+			throw new Exception('Error - Numero de inscrição de pagador esta incorreto.');
+		}
 	}
 
 	/**
 	 * @param field_type $nome_pagador
 	 */
 	public function setNome_pagador($nome_pagador) {
-		$this->nome_pagador = $nome_pagador;
+		if($this->valid_tamanho_campo($nome_pagador, 40)) {
+			$this->nome_pagador = $nome_pagador;
+		}else {
+			throw new Exception('Error - Nome do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
+		}
 	}
 
 	/**
 	 * @param field_type $endereco_pagador
 	 */
 	public function setEndereco_pagador($endereco_pagador) {
-		$this->endereco_pagador = $endereco_pagador;
+		if($this->valid_tamanho_campo($endereco_pagador, 40)) {
+			$this->endereco_pagador = $endereco_pagador;
+		}else {
+			throw new Exception('Error - Endereço do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
+		}
 	}
 
 	/**
 	 * @param field_type $primeira_mensagem
 	 */
 	public function setPrimeira_mensagem($primeira_mensagem) {
-		$this->primeira_mensagem = $primeira_mensagem;
+		if($this->valid_tamanho_campo($primeira_mensagem, 12)) {
+			$this->primeira_mensagem = $primeira_mensagem;
+		}else {
+			throw new Exception('Error - Primeira mensagem invalida, excedido o tamanho maximo de 12 caracteres.');
+		}
 	}
 
 	/**
 	 * @param field_type $cep
 	 */
 	public function setCep($cep) {
-		$this->cep = $cep;
+		if($this->valid_tamanho_campo($cep, 5) && is_numeric($cep)) {
+			$this->cep = $cep;
+		}else {
+			throw new Exception('Error - Valor do CEP do pagador invalido.');
+		}
 	}
 
 	/**
 	 * @param field_type $sufixo_cep
 	 */
 	public function setSufixo_cep($sufixo_cep) {
-		$this->sufixo_cep = $sufixo_cep;
+		if($this->valid_tamanho_campo($sufixo_cep, 3) && is_numeric($sufixo_cep)) {
+			$this->sufixo_cep = $sufixo_cep;
+		}else {
+			throw new Exception('Error - Valor do sufixo do CEP do pagador invalido.');
+		}
 	}
 
 	/**
+	 * Não utilizar as expressões 'taxa bancária' ou 'tarifa bancária' nos boletos de 
+	 * cobrança, pois essa tarifa refere-se à negociada pelo Banco com seu cliente 
+	 * beneficiário. Orientação da FEBRABAN (Comunicado FB-170/2005).
+	 * 
 	 * @param field_type $sacador_segunda_mensagem
 	 */
 	public function setSacador_segunda_mensagem($sacador_segunda_mensagem) {
-		$this->sacador_segunda_mensagem = $sacador_segunda_mensagem;
+		if($this->valid_tamanho_campo($sacador_segunda_mensagem, 60)) {
+			$this->sacador_segunda_mensagem = $sacador_segunda_mensagem;
+		}else {
+			throw new Exception('Error - Dados da segunda mensagem estão invalidos.');
+		}
 	}
 
 	/**
 	 * @param field_type $numero_sequencial_registro
 	 */
 	public function setNumero_sequencial_registro($numero_sequencial_registro) {
-		$this->numero_sequencial_registro = $numero_sequencial_registro;
+		if($this->valid_tamanho_campo($numero_sequencial_registro, 6) && is_numeric($numero_sequencial_registro)) {
+			$this->numero_sequencial_registro = $numero_sequencial_registro;
+		}else {
+			throw new Exception('Error - Valor do sequencial invalido ou excedeu o limite maximo de 6 digitos.');
+		}
 	}
 
 	/* (non-PHPdoc)
