@@ -374,10 +374,10 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $agencia_debito
 	 */
 	public function setAgencia_debito($agencia_debito) {
-		if($this->valid_tamanho_campo($agencia_debito, 5) && is_numeric($agencia_debito)) {
+		if($this->valid_tamanho_campo($agencia_debito, 5) == true && is_numeric($agencia_debito) == true) {
 			$this->agencia_debito = $agencia_debito;
 		}else {
-			throw new Exception('Error: Quantidade dos digito da agencia excedido ou não é numerico.');
+			throw new Exception('Error: A quantidade dos digito do numero da agencia excedido ou não é numerico.');
 		}
 	}
 
@@ -388,7 +388,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 		if($this->valid_tamanho_campo($digito_debito_debito, 1) && is_numeric($digito_debito_debito)) {
 			$this->digito_debito_debito = $digito_debito_debito;
 		}else {
-			throw new Exception('Error: Quantidade do digito excedido ou não é numerico.');
+			throw new Exception('Error: Quantidade de digitos do digito da agencia excedido ou não é numerico.');
 		}
 	}
 
@@ -399,7 +399,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 		if($this->valid_tamanho_campo($razao_conta_corrente, 5) && is_numeric($razao_conta_corrente)) {
 			$this->razao_conta_corrente = $razao_conta_corrente;
 		}else {
-			throw new Exception('Error: Quantidade do digito excedido ou não é numerico.');
+			throw new Exception('Error: Quantidade de digitos da razao da conta corrente foi excedido ou não é numerico.');
 		}
 	}
 
@@ -756,11 +756,99 @@ class Detalhes extends Funcoes implements IFuncoes {
 		}
 	}
 
+	/**
+	 * @return the $condicao_emissao_papeleta_cobranca
+	 */
+	public function getCondicao_emissao_papeleta_cobranca() {
+		return $this->condicao_emissao_papeleta_cobranca;
+	}
+	
+	/**
+	 * @return the $ident_debito_automatico
+	 */
+	public function getIdent_debito_automatico() {
+		return $this->ident_debito_automatico;
+	}
+
+	/**
+	 * @return the $enderecamento_aviso_debito
+	 */
+	public function getEnderecamento_aviso_debito() {
+		return $this->enderecamento_aviso_debito;
+	}
+
+	/**
+	 * @return the $identificacao_ocorrencia
+	 */
+	public function getIdentificacao_ocorrencia() {
+		return $this->identificacao_ocorrencia;
+	}
+
+	/**
+	 * @return the $identificacao_registro
+	 */
+	public function getIdentificacao_registro() {
+		return $this->identificacao_registro;
+	}
+
 	/* (non-PHPdoc)
+	 * Medotos para gerar a linha dos detalhes dos boletos que seram gerados
 	 * @see IFuncoes::montar_linha()
 	 */
 	public function montar_linha() {
-		// TODO Auto-generated method stub
+		//Montando a linha 
+		$linha = 
+			$this->getIdentificacao_registro() .
+			$this->getAgencia_debito() .
+			$this->getDigito_debito_debito() . 
+			$this->getRazao_conta_corrente() . 
+			$this->getConta_corrente(). 
+			$this->getDigito_conta_corrente() . 
+			$this->getIdentificacao_empresa_benificiario_banco() .
+			$this->getNumero_controle_participante() . 
+			$this->getCodigo_banco_debito_compensacao() .
+			$this->getCampo_multa() . 
+			$this->getPercentual_multa() .
+			$this->getIdentificacao_titulo_banco() . 
+			$this->getDigito_auto_consferencia_bancaria() . 
+			$this->getDesconto_bonificacao_dia() .
+			$this->getCondicao_emissao_papeleta_cobranca() . 
+			$this->getIdent_debito_automatico() . 
+			$this->add_zeros('', 10) . 
+			$this->getIndicador_rateio_credito() . 
+			$this->getEnderecamento_aviso_debito() . 
+			$this->add_zeros('', 2) . 
+			$this->getIdentificacao_ocorrencia() . 
+			$this->getNumero_documento() . 
+			$this->getData_vencimento_titulo() . 
+			$this->getValor_titulo() . 
+			$this->getBanco_encarregado_cobranca() . 
+			$this->getAgencia_depositaria() . 
+			$this->getEspecie_titulo() . 
+			$this->getIdentificacao() .  
+			$this->getData_emissao_titulo() . 
+			$this->getInstrucao_1() . 
+			$this->getInstrucao_2() . 
+			$this->getValo_cobrado_dia_atraso() . 
+			$this->getData_limite_desconto() . 
+			$this->getValor_desconto() . 
+			$this->getValor_iof() .
+			$this->getValor_abatimento_concedido_cancelado() . 
+			$this->getIdentificacao_tipo_incricao_pagador() . 
+			$this->getNumero_inscricao_pagador() . 
+			$this->getNome_pagador() . 
+			$this->getEndereco_pagador() . 
+			$this->getEndereco_pagador() . 
+			$this->getPrimeira_mensagem() . 
+			$this->getCep() . 
+			$this->getSufixo_cep() . 
+			$this->getSacador_segunda_mensagem() . 
+			$this->getNumero_sequencial_registro();
+			
+			//return $this->valid_linha($linha);
+			return $linha;
 	}
+	
+
 
 }
