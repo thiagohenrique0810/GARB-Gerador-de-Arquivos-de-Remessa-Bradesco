@@ -814,10 +814,10 @@ class Detalhes extends Funcoes implements IFuncoes {
 			$this->getDesconto_bonificacao_dia() .
 			$this->getCondicao_emissao_papeleta_cobranca() . 
 			$this->getIdent_debito_automatico() . 
-			$this->add_zeros('', 10) . 
+			$this->montar_branco('', 10) . 
 			$this->getIndicador_rateio_credito() . 
 			$this->getEnderecamento_aviso_debito() . 
-			$this->add_zeros('', 2) . 
+			$this->montar_branco('', 2) . 
 			$this->getIdentificacao_ocorrencia() . 
 			$this->getNumero_documento() . 
 			$this->getData_vencimento_titulo() . 
