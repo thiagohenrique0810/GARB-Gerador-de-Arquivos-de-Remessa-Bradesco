@@ -42,23 +42,27 @@ echo $cabecalho->montar_linha() . '<br>';
 //TESTANDO DETALHES
 $detalhes = new Detalhes();
 
+
+
 //preenchendo dados dos detalhes
-$detalhes->setAgencia_debito('18000');
-$detalhes->setDigito_debito_debito('7');
-$detalhes->setRazao_conta_corrente('07050');
-$detalhes->setConta_corrente('0018399');
-$detalhes->setDigito_conta_corrente('7');
-$detalhes->setIdentificacao_empresa_benificiario_banco('00091800000183997');
-$detalhes->setNumero_controle_participante('0000000000000000000007824');
-$detalhes->setCampo_multa('2');
-$detalhes->setPercentual_multa('0007');
-$detalhes->setIdentificacao_titulo_banco('00000000589');
-$detalhes->setDigito_auto_consferencia_bancaria('P');
-$detalhes->setDesconto_bonificacao_dia('0000000010');
-$detalhes->setIndicador_rateio_credito(false);
-$detalhes->setNumero_documento('0000000568');
-$detalhes->setData_vencimento_titulo('201015');
-$detalhes->setValor_titulo('0000000001569');
+$detalhes->setAgencia_debito(18000);
+// $detalhes->setDigito_debito_debito('7');
+// $detalhes->setRazao_conta_corrente('07050');
+// $detalhes->setConta_corrente('0018399');
+// $detalhes->setDigito_conta_corrente('7');
+// $detalhes->setIdentificacao_empresa_benificiario_banco('00091800000183997');
+// $detalhes->setNumero_controle_participante('0000000000000000000007824');
+// $detalhes->setCampo_multa('2');
+// $detalhes->setPercentual_multa('0007');
+// $detalhes->setIdentificacao_titulo_banco('00000000589');
+// $detalhes->setDigito_auto_consferencia_bancaria('P');
+// $detalhes->setDesconto_bonificacao_dia('0000000010');
+// $detalhes->setIndicador_rateio_credito(false);
+// $detalhes->setNumero_documento('0000000568');
+// $detalhes->setData_vencimento_titulo('201015');
+// $detalhes->setValor_titulo(0000000001569);
+
+
 
 echo $detalhes->montar_linha();
 //FIM DE TESTES DE DETALHES

@@ -374,11 +374,20 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $agencia_debito
 	 */
 	public function setAgencia_debito($agencia_debito) {
-		if($this->valid_tamanho_campo($agencia_debito, 5) == true && is_numeric($agencia_debito) == true) {
-			$this->agencia_debito = $agencia_debito;
+		//verificando se é um numero
+		if(is_numeric($agencia_debito)) {
+			//completando o campo
+			$agencia_debito = $this->add_zeros($agencia_debito, 5);
+			//realizando validações
+			if($this->valid_tamanho_campo($agencia_debito, 5)) {
+				$this->agencia_debito = $agencia_debito;
+			}else {
+				throw new Exception('Error: A quantidade dos digito do numero da agencia excedido.');
+			}
 		}else {
-			throw new Exception('Error: A quantidade dos digito do numero da agencia excedido ou não é numerico.');
+			throw new Exception('Error: O campo Agencia_debito não é um numero.');
 		}
+		
 	}
 
 	/**
