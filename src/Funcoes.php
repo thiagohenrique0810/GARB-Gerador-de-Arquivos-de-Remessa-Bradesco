@@ -151,7 +151,7 @@ class Funcoes {
 	 * @return mixed|boolean
 	 */
 	public function remove_formatacao_moeda($valor) {
-		if(is_numeric($var)) {
+		if(is_numeric($valor)) {
 			$return = str_replace(".", "", $valor);
 			$return = str_replace(",", "", $valor);
 			
@@ -174,7 +174,7 @@ class Funcoes {
 		}
 	
 		// Elimina possivel mascara
-		$cpf = ereg_replace('[^0-9]', '', $cpf);
+		$cpf = preg_replace('[^0-9]', '', $cpf);
 		$cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
 		 
 		// Verifica se o numero de digitos informados é igual a 11
