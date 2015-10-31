@@ -136,10 +136,17 @@ class Funcoes {
 	 * @param unknown $tamanho
 	 * @return boolean
 	 */
-	public function valid_tamanho_campo($string, $tamanho) {
+	public function valid_tamanho_campo($string, $tamanho, $menor_que = false) {
 		$length = (int) strlen($string);
+		
 		if($length == $tamanho) {
 			return true;
+		}elseif($menor_que) {
+			if($length > 0 && $length <= 40) {
+				return true;
+			}else {
+				return false;
+			}
 		}else {
 			return false;
 		}

@@ -881,7 +881,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 		$nome_pagador = $this->montar_branco($nome_pagador, 40, 'right');
 		//verifica a quantidade de caracteres
 		if($this->valid_tamanho_campo($nome_pagador, 40)) {
-			$this->nome_pagador = $this->removeAccents(strtoupper($nome_pagador));
+			$this->nome_pagador = strtoupper($this->removeAccents($nome_pagador));
 		}else {
 			throw new Exception('Error - Nome do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
 		}
@@ -891,8 +891,11 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $endereco_pagador
 	 */
 	public function setEndereco_pagador($endereco_pagador) {
+		//preenchendo com brancos
+		$endereco_pagador = $this->montar_branco($endereco_pagador, 40, 'right');
+				
 		if($this->valid_tamanho_campo($endereco_pagador, 40)) {
-			$this->endereco_pagador = $endereco_pagador;
+			$this->endereco_pagador = strtoupper($endereco_pagador);
 		}else {
 			throw new Exception('Error - Endereço do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
 		}
@@ -902,6 +905,9 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $primeira_mensagem
 	 */
 	public function setPrimeira_mensagem($primeira_mensagem) {
+		//preenchendo com brancos
+		$primeira_mensagem = $this->montar_branco($primeira_mensagem, 12, 'right');
+		
 		if($this->valid_tamanho_campo($primeira_mensagem, 12)) {
 			$this->primeira_mensagem = $primeira_mensagem;
 		}else {
@@ -913,10 +919,16 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $cep
 	 */
 	public function setCep($cep) {
-		if($this->valid_tamanho_campo($cep, 5) && is_numeric($cep)) {
-			$this->cep = $cep;
+		//verificando se é um numero
+		if(is_numeric($cep)) {
+			//verificando o tamanho da string
+			if($this->valid_tamanho_campo($cep, 5)) {
+				$this->cep = $this->add_zeros($cep, 5);
+			}else {
+				throw new Exception('Error - Quantidade de caracteres do compo CEP invalidos.');
+			}
 		}else {
-			throw new Exception('Error - Valor do CEP do pagador invalido.');
+			throw new Exception('Error - O campos CEP não é um numero.');
 		}
 	}
 
@@ -924,10 +936,16 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $sufixo_cep
 	 */
 	public function setSufixo_cep($sufixo_cep) {
-		if($this->valid_tamanho_campo($sufixo_cep, 3) && is_numeric($sufixo_cep)) {
-			$this->sufixo_cep = $sufixo_cep;
+		//verificando se é um numero
+		if(is_numeric($sufixo_cep)) {
+			//verificando o tamanho da string
+			if($this->valid_tamanho_campo($sufixo_cep, 3)) {
+				$this->sufixo_cep = $this->add_zeros($sufixo_cep, 3);
+			}else {
+				throw new Exception('Error - Quantidade de caracteres do campo Sufixo invalidos.');
+			}
 		}else {
-			throw new Exception('Error - Valor do sufixo do CEP do pagador invalido.');
+			throw new Exception('Error - O campos Sufixo CEP não é um numero.');
 		}
 	}
 
@@ -939,6 +957,9 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $sacador_segunda_mensagem
 	 */
 	public function setSacador_segunda_mensagem($sacador_segunda_mensagem) {
+		//preenchendo com brancos
+		$sacador_segunda_mensagem = $this->montar_branco($sacador_segunda_mensagem, 60);
+		
 		if($this->valid_tamanho_campo($sacador_segunda_mensagem, 60)) {
 			$this->sacador_segunda_mensagem = $sacador_segunda_mensagem;
 		}else {
@@ -950,11 +971,19 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $numero_sequencial_registro
 	 */
 	public function setNumero_sequencial_registro($numero_sequencial_registro) {
-		if($this->valid_tamanho_campo($numero_sequencial_registro, 6) && is_numeric($numero_sequencial_registro)) {
-			$this->numero_sequencial_registro = $numero_sequencial_registro;
+		//verificando se é um numero
+		if(is_numeric($numero_sequencial_registro)) {
+			//completando com zeros na string
+			$numero_sequencial_registro = $this->add_zeros($numero_sequencial_registro, 6);
+			//verificando o tamanho da string
+			if($this->valid_tamanho_campo($numero_sequencial_registro, 6)) {
+				$this->numero_sequencial_registro = $numero_sequencial_registro;
+			}else {
+				throw new Exception('Error - Quantidade de caracteres do campo Numero Sequencial Registro invalidos.');
+			}
 		}else {
-			throw new Exception('Error - Valor do sequencial invalido ou excedeu o limite maximo de 6 digitos.');
-		}
+			throw new Exception('Error - O campos Numero Sequencial Registro não é um numero.');
+		}		
 	}
 
 	
@@ -1005,7 +1034,6 @@ class Detalhes extends Funcoes implements IFuncoes {
 			$this->getIdentificacao_tipo_incricao_pagador() . 
 			$this->getNumero_inscricao_pagador() . 
 			$this->getNome_pagador() . 
-			$this->getEndereco_pagador() . 
 			$this->getEndereco_pagador() . 
 			$this->getPrimeira_mensagem() . 
 			$this->getCep() . 
