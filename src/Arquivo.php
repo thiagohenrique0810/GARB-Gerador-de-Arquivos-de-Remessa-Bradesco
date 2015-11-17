@@ -1,4 +1,8 @@
 <?php
+include 'HeaderLabel.php';
+include 'Detalhes.php';
+include 'Trailler.php';
+
 class Arquivo {
 	private $header_label;
 	private $trailler;
@@ -100,6 +104,7 @@ class Arquivo {
 		//TESTANDO O HEADERLABEL
 		$cabecalho->setCodigo_empresa($dados['codigo_empresa']);
 		$cabecalho->setNome_empresa($dados['razao_social']);
+		$cabecalho->setNumero_sequencial_remessa($dados['numero_remessa']);
 		$cabecalho->setData_gravacao($dados['data_gravacao']);
 
 		$this->setHeader_label($cabecalho);
@@ -109,16 +114,15 @@ class Arquivo {
 	 * metodo para criar o texto inteiro da remessa
 	 */
 	public function get_text() {
-		$numero_sequencial = 1;
-		
 		//Montando texto
-		$this->getHeader_label()->setNumero_sequencial_remessa($numero_sequencial);
-		$dados = $this->getHeader_label() . self::QUEBRA_LINHA;
+		$dados = $this->getHeader_label()->montar_linha() . self::QUEBRA_LINHA;
+		//montando linhas dos boletos
+		$numero_sequencial = 2;
 		foreach ($this->getDetalhes() as $detalhe) {
 			$detalhe->setNumero_sequencial_registro($numero_sequencial++);
-			$dados .= $detalhe . self::QUEBRA_LINHA;
+			$dados .= $detalhe->montar_linha() . self::QUEBRA_LINHA;
 		}
-		$this->getTrailler()->setNumero_sequencial_regsitro($numero_sequencial++);
+		//montando rodapé
 		$dados .= $this->getTrailler();
 		
 		return $dados;
@@ -128,7 +132,10 @@ class Arquivo {
 	 * metodo para fazer download do arquivo de remessa
 	 */
 	public function save() {
-		$text = $this->getText();
+		$text = $this->get_text();
+		
+		die($text);
+		
 		file_put_contents($filename, $text);
 	}
 	

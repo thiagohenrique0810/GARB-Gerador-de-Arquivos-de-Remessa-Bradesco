@@ -107,7 +107,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 		if(is_numeric($data_gravacao)) {
 			$this->data_gravacao = $data_gravacao;
 		}else {
-			throw new Exception('Error - Não é um numero.');
+			throw new Exception('Error - O campo data de gravação não é um numero.');
 		}
 	}
 	
@@ -115,7 +115,18 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 	 * @param string $numero_sequencial_remessa
 	 */
 	public function setNumero_sequencial_remessa($numero_sequencial_remessa) {
-		$this->numero_sequencial_remessa = $numero_sequencial_remessa;
+		//verificando se é um numero
+		if(is_numeric($numero_sequencial_remessa)) {
+			//completando a string com zeros
+			$numero_sequencial_remessa = $this->add_zeros($numero_sequencial_remessa, 7);
+			if($this->valid_tamanho_campo($numero_sequencial_remessa, 7)) {
+				$this->numero_sequencial_remessa = $numero_sequencial_remessa;
+			}else {
+				throw new Exception('Error - Tamanho de texto invalido, para o campo numero sequencial remessa.');
+			}
+		}else {
+			throw new Exception('Error - O campo numero sequencial remessa não é um numero.');
+		}
 	}
 	
 	/* (non-PHPdoc)
@@ -142,7 +153,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 			$this->getNumero_sequencial_remessa()	.
 			$this->montar_branco('',277)			.
 			$this->numero_sequencial_regsitro;
-			
+
 			return $this->valid_linha($linha);
 	}
 	
