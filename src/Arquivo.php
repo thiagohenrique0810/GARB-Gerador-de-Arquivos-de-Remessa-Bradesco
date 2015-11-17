@@ -157,7 +157,7 @@ class Arquivo {
 			$this->setFilename('CB' . date('dm') . 'A1');
 		}
 		
-		file_put_contents($this->getFilename(), $text);
+		file_put_contents($this->getFilename() . '.REM', $text);
 	}
 	
 	/**

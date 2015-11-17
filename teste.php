@@ -1,7 +1,6 @@
 <?php
 //REALIZANDO TESTES
 include 'src/Arquivo.php';
-echo "<pre>";
 
 //configurando o arquivo de remessa
 $config['codigo_empresa'] = '1054508';
@@ -51,7 +50,6 @@ for ($i = 0; $i < 20; $i++) {
 	$arquivo->add_boleto($boleto);
 }
 
+$arquivo->setFilename('C:/Ampps/www/projects/DESENVOLVIMENTO/GARB---Gerador-de-Arquivos-de-Remessa-Bradesco/src/CB171101');
+
 $arquivo->save();
-
-
-echo "</pre>";
