@@ -45,41 +45,42 @@ $detalhes = new Detalhes();
 
 
 //preenchendo dados dos detalhes
-$detalhes->setAgencia_debito(18000);
-$detalhes->setDigito_debito_debito(7);
-$detalhes->setRazao_conta_corrente(7050);
-$detalhes->setConta_corrente(18399);
-$detalhes->setDigito_conta_corrente(7);
-$detalhes->setIdentificacao_empresa_benificiario_banco(91800000183997);
-$detalhes->setNumero_controle_participante(7824);
+$detalhes->setAgencia_debito(9999);
+$detalhes->setDigito_debito_debito(9);
+$detalhes->setRazao_conta_corrente(99999);
+$detalhes->setConta_corrente(999);
+$detalhes->setDigito_conta_corrente(9);
+$detalhes->setIdentificacao_empresa_benificiario_banco(9999999999999);
+$detalhes->setNumero_controle_participante(36541695163);
+$detalhes->setCodigo_banco_debito_compensacao(true);
 $detalhes->setCampo_multa(true);
-$detalhes->setPercentual_multa(7);
-$detalhes->setIdentificacao_titulo_banco(589);
+$detalhes->setPercentual_multa(9);
+$detalhes->setIdentificacao_titulo_banco(999999999);
 $detalhes->setDigito_auto_consferencia_bancaria('P');
-$detalhes->setDesconto_bonificacao_dia(10);
+$detalhes->setDesconto_bonificacao_dia(99999999);
 $detalhes->setIndicador_rateio_credito(false);
-$detalhes->setNumero_documento(568);
+$detalhes->setNumero_documento(9999999);
 $detalhes->setData_vencimento_titulo('201015');
-$detalhes->setValor_titulo(1569);
+$detalhes->setValor_titulo(99999999999);
 $detalhes->setData_emissao_titulo('101015');
-$detalhes->setValo_cobrado_dia_atraso(50);
+$detalhes->setValo_cobrado_dia_atraso(5550);
 $detalhes->setData_limite_desconto('251015');
-$detalhes->setValor_desconto(500);
-$detalhes->setValor_iof(0);
-$detalhes->setValor_abatimento_concedido_cancelado(0);
+$detalhes->setValor_desconto(9999999999);
+$detalhes->setValor_iof(99999999);
+$detalhes->setValor_abatimento_concedido_cancelado(9999999999);
 $detalhes->setIdentificacao_tipo_incricao_pagador('CPF');
 $detalhes->setNumero_inscricao_pagador('09191332400');
-$detalhes->setNome_pagador('Thiago Henrique Pequeno da Silva');
-$detalhes->setEndereco_pagador('Travessa Suassuna, nº126');
-$detalhes->setPrimeira_mensagem('');
-$detalhes->setCep(54100);
-$detalhes->setSufixo_cep(230);
-$detalhes->setSacador_segunda_mensagem('');
-$detalhes->setNumero_sequencial_registro(132);
+$detalhes->setNome_pagador('Thiago Henrique Pequeno  Silvaxxxxxxxx');
+$detalhes->setEndereco_pagador('RUA FULA NO TAL');
+$detalhes->setPrimeira_mensagem('OLA');
+$detalhes->setCep(99999);
+$detalhes->setSufixo_cep(999);
+$detalhes->setSacador_segunda_mensagem('OLA ESSA É UMA MENSAGEM');
+$detalhes->setNumero_sequencial_registro(99999);
 
 $linha = $detalhes->montar_linha();
 
-for ($i = 0; $i < 100; $i++) {
+for ($i = 0; $i < 25; $i++) {
 	echo $linha . '<br>';
 }
 
