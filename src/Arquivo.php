@@ -5,10 +5,25 @@ include 'Trailler.php';
 
 class Arquivo {
 	private $header_label;
+	private $filename;
 	private $trailler;
 	const   QUEBRA_LINHA = "\r\n";
 	private  $detalhes = array();
 	
+	/**
+	 * @return the $filename
+	 */
+	public function getFilename() {
+		return $this->filename;
+	}
+
+	/**
+	 * @param field_type $filename
+	 */
+	public function setFilename($filename) {
+		$this->filename = $filename;
+	}
+
 	/**
 	 * @return the $detalhes
 	 */
@@ -123,7 +138,10 @@ class Arquivo {
 			$dados .= $detalhe->montar_linha() . self::QUEBRA_LINHA;
 		}
 		//montando rodapé
-		$dados .= $this->getTrailler();
+		$trailler = new Trailler();
+		$trailler->setNumero_sequencial_regsitro($numero_sequencial++);
+		$this->setTrailler($trailler);
+		$dados .= $this->getTrailler()->montar_linha();
 		
 		return $dados;
 	}
@@ -133,10 +151,13 @@ class Arquivo {
 	 */
 	public function save() {
 		$text = $this->get_text();
+		//die($text);
+		//atribuindo um nome do arquivo
+		if($this->getFilename() == '') {
+			$this->setFilename('CB' . date('dm') . 'A1');
+		}
 		
-		die($text);
-		
-		file_put_contents($filename, $text);
+		file_put_contents($this->getFilename(), $text);
 	}
 	
 	/**

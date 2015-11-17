@@ -9,7 +9,6 @@ $config['razao_social'] = 'Agnetech Soluções empresariais';
 $config['numero_remessa'] = '2165';
 $config['data_gravacao'] = '280815';
 
-
 $arquivo = new Arquivo();
 //configurando remessa
 $arquivo->config($config);
