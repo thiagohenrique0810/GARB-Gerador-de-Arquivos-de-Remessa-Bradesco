@@ -79,7 +79,7 @@ class Arquivo {
 		$detalhes->setRazao_conta_corrente($boleto['razao_conta_corrente']);
 		$detalhes->setConta_corrente($boleto['conta']);
 		$detalhes->setDigito_conta_corrente($boleto['conta_dv']);
-		$detalhes->setIdentificacao_empresa_benificiario_banco($boleto['identificacao_empresa']);
+		$detalhes->setCarteira($boleto['carteira']);
 		$detalhes->setNumero_controle_participante($boleto['numero_controle']);
 		$detalhes->setCodigo_banco_debito_compensacao($boleto['habilitar_debito_compensacao']);
 		$detalhes->setCampo_multa($boleto['habilitar_multa']);

@@ -102,8 +102,18 @@ class Detalhes extends Funcoes implements IFuncoes {
 	private $sacador_segunda_mensagem;//<---- ver observações 
 	//395 - 400 - 6 - N - AUTOINCREMENTADO E UNICO
 	private $numero_sequencial_registro;
+	
+	//EXTRA
+	private $carteira;
 
 	
+	/**
+	 * @return the $carteira
+	 */
+	public function getCarteira() {
+		return $this->carteira;
+	}
+
 	/**
 	 * @return the $agencia_debito
 	 */
@@ -143,7 +153,17 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @return the $identificacao_empresa_benificiario_banco
 	 */
 	public function getIdentificacao_empresa_benificiario_banco() {
-		return $this->identificacao_empresa_benificiario_banco;
+		/*
+		 * montando numero de identificação da empresa
+		 * ex: 0|009|01800|0018399|7
+		 */
+		$identificacao_empresa_benificiario_banco = '0' . 
+													$this->getCarteira() . 
+													$this->getAgencia_depositaria() . 
+													$this->getConta_corrente() . 
+													$this->getDigito_conta_corrente();
+		
+		return $identificacao_empresa_benificiario_banco;
 	}
 
 	/**
@@ -492,25 +512,6 @@ class Detalhes extends Funcoes implements IFuncoes {
 			}
 		}else {
 			throw new Exception('Error: O campo Digito Conta Corrente não é um numero.');
-		}
-	}
-
-	/**
-	 * @param field_type $identificacao_empresa_benificiario_banco
-	 */
-	public function setIdentificacao_empresa_benificiario_banco($identificacao_empresa_benificiario_banco) {
-		//verificando se é um numero
-		if(is_numeric($identificacao_empresa_benificiario_banco)) {
-			//completando string com zeros
-			$identificacao_empresa_benificiario_banco = $this->add_zeros($identificacao_empresa_benificiario_banco, 17);
-			//verificando o tamanho da string
-			if($this->valid_tamanho_campo($identificacao_empresa_benificiario_banco, 17)) {
-				$this->identificacao_empresa_benificiario_banco = $identificacao_empresa_benificiario_banco;
-			}else {
-				throw new Exception('Error: Quantidade de caracteres do campo Identificação Empresa Benificiario Banco invalidos.');
-			}
-		}else {
-			throw new Exception('Error: O campo Identificação Empresa Beneficiario Banco não é um numero.');
 		}
 	}
 
@@ -995,13 +996,30 @@ class Detalhes extends Funcoes implements IFuncoes {
 		}		
 	}
 
-	
+	/**
+	 * @param field_type $carteira
+	 */
+	public function setCarteira($carteira) {
+		//verificando se é um numero
+		if(is_numeric($carteira)) {
+			$carteira = $this->add_zeros($carteira, 3);
+			if($this->valid_tamanho_campo($carteira, 3)) {
+				$this->carteira = $carteira;
+			}else {
+				throw new Exception('Error - Quantidade de caracteres do campo Carteira estão invalidos.');
+			}
+		}else {
+			throw new Exception('Error - O campos Carteira não é um numero.');
+		}
+		
+	}
 
 	/* (non-PHPdoc)
 	 * Medotos para gerar a linha dos detalhes dos boletos que seram gerados
 	 * @see IFuncoes::montar_linha()
 	 */
 	public function montar_linha() {
+		
 		//Montando a linha 
 		$linha = 
 			$this->getIdentificacao_registro() . //nao seta
