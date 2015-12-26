@@ -6,17 +6,17 @@
  * GARB - GERADOR DE ARQUIVOS DE REMESSA BRADESCO
  * 
  * Lay-out do Arquivo-Remessa - Registro Trailler
- * Descrição de Registro - Tamanho 400 Bytes
- * A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas)
- * N - Numérico
+ * Descriï¿½ï¿½o de Registro - Tamanho 400 Bytes
+ * A - Alfanumï¿½rico - Conteï¿½do em Caixa Alta (Letras Maiï¿½sculas)
+ * N - Numï¿½rico
  */
-require_once 'src/Funcoes.php';
+require_once 'Funcoes.php';
 
 class Trailler extends Funcoes implements IFuncoes{
 	//001 - 001 - 1 - N CONSTANTE
 	private $identificacao_registro = 9;
 	//002 - 394 - 393 - A 
-	//CAMPO EM BRANCO COM 393 POSIÇÕES
+	//CAMPO EM BRANCO COM 393 POSIï¿½ï¿½ES
 	//395 - 400 - 6 - N 
 	private $numero_sequencial_regsitro = ''; //ultima numero do sequencial dado pelo gerador
 	

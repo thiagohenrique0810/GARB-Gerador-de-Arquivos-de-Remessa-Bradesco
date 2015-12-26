@@ -1,19 +1,19 @@
 <?php
 /**
- * Lay-out do Arquivo-Remessa - Registro de Transação - Tipo 1
- * Lay-out para Cobrança com Registro e sem Registro com Emissão do Boleto pelo 
+ * Lay-out do Arquivo-Remessa - Registro de Transaï¿½ï¿½o - Tipo 1
+ * Lay-out para Cobranï¿½a com Registro e sem Registro com Emissï¿½o do Boleto pelo 
  * Banco ou pela Empresa
- * Descrição de Registro - Tamanho 400 Bytes
- * A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas)
- * N – Numérico
+ * Descriï¿½ï¿½o de Registro - Tamanho 400 Bytes
+ * A - Alfanumï¿½rico - Conteï¿½do em Caixa Alta (Letras Maiï¿½sculas)
+ * N ï¿½ Numï¿½rico
  */
-require_once 'src/Funcoes.php';
-require_once 'src/IFuncoes.php';
+require_once 'Funcoes.php';
+require_once 'IFuncoes.php';
 
 class Detalhes extends Funcoes implements IFuncoes {
 	
 	//001 - 001 - 1 -  N CONSTANTE
-	private $identificacao_registro = 0;
+	private $identificacao_registro = 1;
 	//002 - 006 - 5 - N
 	private $agencia_debito;
 	//007 - 007 - 1 - A
@@ -41,43 +41,43 @@ class Detalhes extends Funcoes implements IFuncoes {
 	//083 - 092 - 10 - N
 	private $desconto_bonificacao_dia;
 	//093 - 093 - 1 - CONSTANTE
-	private $condicao_emissao_papeleta_cobranca = 2; //<--- verificar observações
+	private $condicao_emissao_papeleta_cobranca = 2; //<--- verificar observaï¿½ï¿½es
 	//094 - 094 - 1 - A - CONSTANTE
-	private $ident_debito_automatico = 'N'; //<---- ver observações
+	private $ident_debito_automatico = 'N'; //<---- ver observaï¿½ï¿½es
 	//095 - 104 - 10 - A
-	//PREENCHER ESPAÇOS EM BRANCO
+	//PREENCHER ESPAï¿½OS EM BRANCO
 	//105 - 105 - 1 - A
 	private $indicador_rateio_credito;
 	//106 - 106 - 1 - N - CONSTANTE
-	private $enderecamento_aviso_debito = '0'; //<---- ver observações 
+	private $enderecamento_aviso_debito = '0'; //<---- ver observaï¿½ï¿½es 
 	//107 - 108 - 2 - A
-	//PREENCHER ESPAÇOS EM BRANCO
+	//PREENCHER ESPAï¿½OS EM BRANCO
 	//109 - 110 - 2 - N - CONSTANTE
-	private $identificacao_ocorrencia = '01'; //<---- ver observações 
+	private $identificacao_ocorrencia = '01'; //<---- ver observaï¿½ï¿½es 
 	//111 - 120 - 10 - A
 	private $numero_documento;
 	//121 - 126 - 6 - N
 	private $data_vencimento_titulo;
 	//127 - 139 - 13 - N
-	private $valor_titulo;//<---- ver observações 
+	private $valor_titulo;//<---- ver observaï¿½ï¿½es 
 	//140 - 142 - 3 - N
 	private $banco_encarregado_cobranca = "000";
 	//143 - 147 - 5 - N
 	private $agencia_depositaria = "00000";
 	//148 - 149 - 2 - N - CONSTRANTE
-	private $especie_titulo = '01';//<---- ver observações 
+	private $especie_titulo = '01';//<---- ver observaï¿½ï¿½es 
 	//150 - 150 - 1 - A
 	private $identificacao = "N";
 	//151 - 156 - 6 - N
 	private $data_emissao_titulo;
 	//157 -  158 - 2 - N
-	private $instrucao_1 = '00';//<---- ver observações FUNÇÃO INTERESSANTE POIS PODE SER USADA PARA QUE O SISTEMA GERE AUTOMATICAMENTE O PROTESTO DE ACORDO COM O SOLICITADO
+	private $instrucao_1 = '00';//<---- ver observaï¿½ï¿½es FUNï¿½ï¿½O INTERESSANTE POIS PODE SER USADA PARA QUE O SISTEMA GERE AUTOMATICAMENTE O PROTESTO DE ACORDO COM O SOLICITADO
 	//159 - 160 - 2 - N
-	private $instrucao_2 = '00';//<---- ver observações 
+	private $instrucao_2 = '00';//<---- ver observaï¿½ï¿½es 
 	//161 - 173 - 13 - N
-	private $valo_cobrado_dia_atraso;//<---- ver observações 
+	private $valo_cobrado_dia_atraso;//<---- ver observaï¿½ï¿½es 
 	//174 - 179 - 6 - N
-	private $data_limite_desconto;//<---- ver observações 
+	private $data_limite_desconto;//<---- ver observaï¿½ï¿½es 
 	//180 - 192 - 13 - N
 	private $valor_desconto;
 	//192 - 205 - 13 N
@@ -85,9 +85,9 @@ class Detalhes extends Funcoes implements IFuncoes {
 	//206 - 218 - 13 - N
 	private $valor_abatimento_concedido_cancelado;
 	//219 - 220 - 2 - N
-	private $identificacao_tipo_incricao_pagador;//<---- ver observações 
+	private $identificacao_tipo_incricao_pagador;//<---- ver observaï¿½ï¿½es 
 	//221 - 234 - 14 - N
-	private $numero_inscricao_pagador;//<---- ver observações 
+	private $numero_inscricao_pagador;//<---- ver observaï¿½ï¿½es 
 	//235 - 274 - 40 - A
 	private $nome_pagador;
 	//275 - 314 - 40 - A
@@ -99,7 +99,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	//332 - 334 - 3 - N
 	private $sufixo_cep;
 	//335 - 394 - 60 - A
-	private $sacador_segunda_mensagem;//<---- ver observações 
+	private $sacador_segunda_mensagem;//<---- ver observaï¿½ï¿½es 
 	//395 - 400 - 6 - N - AUTOINCREMENTADO E UNICO
 	private $numero_sequencial_registro;
 	
@@ -154,12 +154,12 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 */
 	public function getIdentificacao_empresa_benificiario_banco() {
 		/*
-		 * montando numero de identificação da empresa
-		 * ex: 0|009|01800|0018399|7
+		 * montando numero de identificacao da empresa
+		 * exemplo: 0|009|01800|0018399|7
 		 */
 		$identificacao_empresa_benificiario_banco = '0' . 
 													$this->getCarteira() . 
-													$this->getAgencia_depositaria() . 
+													$this->getAgencia_debito() . 
 													$this->getConta_corrente() . 
 													$this->getDigito_conta_corrente();
 		
@@ -205,7 +205,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @return the $digito_auto_consferencia_bancaria
 	 */
 	public function getDigito_auto_consferencia_bancaria() {
-		return $this->digito_auto_consferencia_bancaria;
+		return $this->digito_verificador_nosso_numero($this->getIdentificacao_titulo_banco());
 	}
 
 	/**
@@ -429,18 +429,18 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $agencia_debito
 	 */
 	public function setAgencia_debito($agencia_debito) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($agencia_debito)) {
 			//completando o campo
 			$agencia_debito = $this->add_zeros($agencia_debito, 5);
-			//realizando validações
+			//realizando validaï¿½ï¿½es
 			if($this->valid_tamanho_campo($agencia_debito, 5)) {
 				$this->agencia_debito = $agencia_debito;
 			}else {
 				throw new Exception('Error: A quantidade dos digito do numero da agencia excedido.');
 			}
 		}else {
-			throw new Exception('Error: O campo Agencia_debito não é um numero.');
+			throw new Exception('Error: O campo Agencia_debito nï¿½o ï¿½ um numero.');
 		}
 		
 	}
@@ -449,7 +449,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $digito_debito_debito
 	 */
 	public function setDigito_debito_debito($digito_debito_debito) {
-		//verifica se é numerico
+		//verifica se ï¿½ numerico
 		if(is_numeric($digito_debito_debito)) {
 			//validando a quantidade de caracteres
 			if($this->valid_tamanho_campo($digito_debito_debito, 1)) {
@@ -458,7 +458,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de digitos para o campo Digito Agencia Debito invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Digito Agencia debito não é um numero.');
+			throw new Exception('Error: O campo Digito Agencia debito nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -466,7 +466,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $razao_conta_corrente
 	 */
 	public function setRazao_conta_corrente($razao_conta_corrente) {
-		//validando para ver se é um numero
+		//validando para ver se ï¿½ um numero
 		if(is_numeric($razao_conta_corrente)) {
 			//completando com zeros a string
 			$razao_conta_corrente = $this->add_zeros($razao_conta_corrente, 5);
@@ -474,10 +474,10 @@ class Detalhes extends Funcoes implements IFuncoes {
 			if($this->valid_tamanho_campo($razao_conta_corrente, 5)) {
 				$this->razao_conta_corrente = $razao_conta_corrente;
 			}else {
-				throw new Exception('Error: Quantidade de caracteres do campo Razão Conta Corrente invalidos.');
+				throw new Exception('Error: Quantidade de caracteres do campo Razï¿½o Conta Corrente invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Razão Conta Corrente não é um numero.');
+			throw new Exception('Error: O campo Razï¿½o Conta Corrente nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -485,7 +485,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $conta_corrente
 	 */
 	public function setConta_corrente($conta_corrente) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($conta_corrente)) {
 			$conta_corrente = $this->add_zeros($conta_corrente, 7);
 			
@@ -495,7 +495,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade d ecaracteres do campo Conta Corrente invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Conta Corrente não é um numero.');
+			throw new Exception('Error: O campo Conta Corrente nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -503,7 +503,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $digito_conta_corrente
 	 */
 	public function setDigito_conta_corrente($digito_conta_corrente) {
-		//verificando se é numerico
+		//verificando se ï¿½ numerico
 		if(is_numeric($digito_conta_corrente)) {
 			if($this->valid_tamanho_campo($digito_conta_corrente, 1)) {
 				$this->digito_conta_corrente = $digito_conta_corrente;
@@ -511,16 +511,16 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Digito Conta Conrrente.');
 			}
 		}else {
-			throw new Exception('Error: O campo Digito Conta Corrente não é um numero.');
+			throw new Exception('Error: O campo Digito Conta Corrente nï¿½o ï¿½ um numero.');
 		}
 	}
 
 	/**
-	 * semelhante ao numero do documento - pode ser uma chave unica de identificação de cada boleto da remessa
+	 * semelhante ao numero do documento - pode ser uma chave unica de identificaï¿½ï¿½o de cada boleto da remessa
 	 * @param field_type $numero_controle_participante
 	 */
 	public function setNumero_controle_participante($numero_controle_participante) {
-		//verificando e é um numero
+		//verificando e ï¿½ um numero
 		if(is_numeric($numero_controle_participante)) {
 			//adicionando caracteres zeros
 			$numero_controle_participante = $this->add_zeros($numero_controle_participante, 25);
@@ -531,12 +531,12 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Numero Controle Participante invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Numero Controle Participante não é um numero.');
+			throw new Exception('Error: O campo Numero Controle Participante nï¿½o ï¿½ um numero.');
 		}
 	}
 
 	/**
-	 * se existir debito automatico para o beneficiario, deverá ser passado como parametro TRUE
+	 * se existir debito automatico para o beneficiario, deverï¿½ ser passado como parametro TRUE
 	 * @param string $codigo_banco_debito_compensacao
 	 */
 	public function setCodigo_banco_debito_compensacao($codigo_banco_debito_compensacao = false) {
@@ -565,7 +565,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	public function setPercentual_multa($percentual_multa) {
 		//verificando e o campo multa foi setado como verdadeiro
 		if($this->getCampo_multa()) {
-			//verificando se é um numero
+			//verificando se ï¿½ um numero
 			if(is_numeric($percentual_multa)) {
 				//adicionando caracteres zeros na string
 				$percentual_multa = $this->add_zeros($percentual_multa, 4);
@@ -576,7 +576,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 					throw new Exception('Error: Quantidade de caracteres do campo Percentual Multa invalidos.');
 				}
 			}else {
-				throw new Exception('Error: O campo Percentual Multa não é um numero.');
+				throw new Exception('Error: O campo Percentual Multa nï¿½o ï¿½ um numero.');
 			}
 		}else {
 			$this->percentual_multa = '0000';
@@ -588,7 +588,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $identificacao_titulo_banco
 	 */
 	public function setIdentificacao_titulo_banco($identificacao_titulo_banco) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($identificacao_titulo_banco)) {
 			//adicionando zeros na string
 			$identificacao_titulo_banco = $this->add_zeros($identificacao_titulo_banco, 11);
@@ -596,38 +596,19 @@ class Detalhes extends Funcoes implements IFuncoes {
 			if($this->valid_tamanho_campo($identificacao_titulo_banco, 11)) {
 				$this->identificacao_titulo_banco = $identificacao_titulo_banco;
 			}else {
-				throw new Exception('Error: Quantidade de caracteres do campo Identificação Titulo Banco invalidos.');
+				throw new Exception('Error: Quantidade de caracteres do campo Identificaï¿½ï¿½o Titulo Banco invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Identificação Titulo Banco não é um numero.');
+			throw new Exception('Error: O campo Identificaï¿½ï¿½o Titulo Banco nï¿½o ï¿½ um numero.');
 		}
 	}
 
 	/**
-	 * digito verificador do nosso numero
-	 * sendo de responsabilidade de quem ira inserir-lo 
-	 * @param field_type $digito_auto_consferencia_bancaria
-	 */
-	public function setDigito_auto_consferencia_bancaria($digito_auto_consferencia_bancaria) {
-		//verifica se é alfanumerico
-		if(ctype_alnum($digito_auto_consferencia_bancaria)) {
-			//verificando a quantidade de caracteres na string
-			if($this->valid_tamanho_campo($digito_auto_consferencia_bancaria, 1)) {
-				$this->digito_auto_consferencia_bancaria = $digito_auto_consferencia_bancaria;
-			}else{
-				throw new Exception('Error: Quantidade de caracteres do campo Digito Auto Conferencia Bancaria Nosso Numero invalidos.');
-			}
-		}else {
-			throw new Exception('Error: O campo Digito Auto Conferencia Bancaria Nosso Numero não é um valor alfanumerico.');
-		}
-	}
-
-	/**
-	 * valor de bonificação por dia
+	 * valor de bonificaï¿½ï¿½o por dia
 	 * @param field_type $desconto_bonificacao_dia
 	 */
 	public function setDesconto_bonificacao_dia($desconto_bonificacao_dia) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($desconto_bonificacao_dia)) {
 			//adicionando zeros na string 
 			$desconto_bonificacao_dia = $this->add_zeros($desconto_bonificacao_dia, 10);
@@ -635,10 +616,10 @@ class Detalhes extends Funcoes implements IFuncoes {
 			if($this->valid_tamanho_campo($desconto_bonificacao_dia, 10)) {
 				$this->desconto_bonificacao_dia = $desconto_bonificacao_dia;
 			}else {
-				throw new Exception('Error: Quantidade de caracteres do campo Desconto Bonificação Dia invalidos');
+				throw new Exception('Error: Quantidade de caracteres do campo Desconto Bonificaï¿½ï¿½o Dia invalidos');
 			}
 		}else {
-			throw new Exception('Error: O campo Desconto Bonificação Dia  não é um numero.');
+			throw new Exception('Error: O campo Desconto Bonificaï¿½ï¿½o Dia  nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -657,7 +638,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $numero_documento
 	 */
 	public function setNumero_documento($numero_documento) {
-		//verificando se é alfanumerico
+		//verificando se ï¿½ alfanumerico
 		if(ctype_alnum($numero_documento)) {
 			//adicionando zeros na string
 			$numero_documento = $this->add_zeros($numero_documento, 10);
@@ -668,7 +649,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Numero Documento invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Numero Documento não é alfanumerico.');
+			throw new Exception('Error: O campo Numero Documento nï¿½o ï¿½ alfanumerico.');
 		}
 	}
 
@@ -676,7 +657,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $data_vencimento_titulo
 	 */
 	public function setData_vencimento_titulo($data_vencimento_titulo) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($data_vencimento_titulo)) {
 			//adicionando zeros na string
 			$data_vencimento_titulo = $this->add_zeros($data_vencimento_titulo, 6);
@@ -687,7 +668,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Data Vencimento Titulo invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Data Vencimento Titulo não é um numero.');
+			throw new Exception('Error: O campo Data Vencimento Titulo nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -695,7 +676,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $valor_titulo
 	 */
 	public function setValor_titulo($valor_titulo) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($valor_titulo)) {	
 			//adicionando zeros na string
 			$valor_titulo = $this->add_zeros($valor_titulo, 13);
@@ -706,7 +687,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Valor Titulo invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Valor Titulo não é um numero.');
+			throw new Exception('Error: O campo Valor Titulo nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -714,7 +695,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $data_emissao_titulo
 	 */
 	public function setData_emissao_titulo($data_emissao_titulo) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($data_emissao_titulo)) {
 			//adicionando zeros
 			$data_emissao_titulo = $this->add_zeros($data_emissao_titulo, 6);
@@ -722,10 +703,10 @@ class Detalhes extends Funcoes implements IFuncoes {
 			if($this->valid_tamanho_campo($data_emissao_titulo, 6)) {
 				$this->data_emissao_titulo = $data_emissao_titulo;
 			}else {
-				throw new Exception('Error: Quantidade de caracteres do campo Data Emissão Titulo invalidos.');
+				throw new Exception('Error: Quantidade de caracteres do campo Data Emissï¿½o Titulo invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Data Emissao Titulo não é um numero.');
+			throw new Exception('Error: O campo Data Emissao Titulo nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -733,7 +714,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $valo_cobrado_dia_atraso
 	 */
 	public function setValo_cobrado_dia_atraso($valo_cobrado_dia_atraso) {
-		//verifica se é um numero
+		//verifica se ï¿½ um numero
 		if(is_numeric($valo_cobrado_dia_atraso)) {
 			//adicionando caracteres na string
 			$valo_cobrado_dia_atraso = $this->add_zeros($valo_cobrado_dia_atraso, 13);
@@ -744,7 +725,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Valor Cobrado Dia Atraso invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Valor Cobrado Dia Atraso não é um numero.');
+			throw new Exception('Error: O campo Valor Cobrado Dia Atraso nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -752,7 +733,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $data_limite_desconto
 	 */
 	public function setData_limite_desconto($data_limite_desconto) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($data_limite_desconto)) {
 			//verificando quantidade de caracteres
 			if($this->valid_tamanho_campo($data_limite_desconto, 6)) {
@@ -761,7 +742,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Data Limite Desconto invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Data Limite Desconto não é um numero.');
+			throw new Exception('Error: O campo Data Limite Desconto nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -769,7 +750,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $valor_desconto
 	 */
 	public function setValor_desconto($valor_desconto) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($valor_desconto)) {
 			//adicionando zeros na string
 			$valor_desconto = $this->add_zeros($valor_desconto, 13);
@@ -780,7 +761,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Valor Desconto invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Valor Desconto não é um numero.');
+			throw new Exception('Error: O campo Valor Desconto nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -788,7 +769,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $valor_iof
 	 */
 	public function setValor_iof($valor_iof = 0) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($valor_iof)) {
 			//adicionando zeros na string
 			$valor_iof = $this->add_zeros($valor_iof, 13);
@@ -799,7 +780,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Valor IOF invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Valor IOF não é um numero.');
+			throw new Exception('Error: O campo Valor IOF nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -807,7 +788,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $valor_abatimento_concedido_cancelado
 	 */
 	public function setValor_abatimento_concedido_cancelado($valor_abatimento_concedido_cancelado = 0) {
-		//verifica se é um numero
+		//verifica se ï¿½ um numero
 		if(is_numeric($valor_abatimento_concedido_cancelado)) {
 			//adicionando zeros na string
 			$valor_abatimento_concedido_cancelado = $this->add_zeros($valor_abatimento_concedido_cancelado, 13);
@@ -818,7 +799,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error: Quantidade de caracteres do campo Valor Concedido Cancelado invalidos.');
 			}
 		}else {
-			throw new Exception('Error: O campo Valor Abatimento Concedido Cancelado não é um numero.');
+			throw new Exception('Error: O campo Valor Abatimento Concedido Cancelado nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -855,31 +836,32 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $numero_inscricao_pagador
 	 */
 	public function setNumero_inscricao_pagador($numero_inscricao_pagador) {
-		//verifica se é um numero
+		//verifica se ï¿½ um numero
 		if(is_numeric($numero_inscricao_pagador)) {
 			//verificando o tipo de pagador
 			if($this->getIdentificacao_tipo_incricao_pagador() == '01') {
 				//verificando tamanho do campo
-				if($this->valid_tamanho_campo($numero_inscricao_pagador, 11) && $this->validaCPF($numero_inscricao_pagador) == true) {
+				//if($this->valid_tamanho_campo($numero_inscricao_pagador, 11) && $this->validaCPF($numero_inscricao_pagador) == true) {//DESABILITADO PARA VERIFICAÃ‡ÃƒO
+				if($this->valid_tamanho_campo($numero_inscricao_pagador, 11)) {
 					//completando campo
 					$numero_inscricao_pagador  = '000' . $numero_inscricao_pagador;
 					
 					$this->numero_inscricao_pagador = $numero_inscricao_pagador;
 				}else {
-					throw new Exception('Error -  CPF do campo Numero Inscrição Pagador Invalido.');
+					throw new Exception('Error -  CPF do campo Numero InscriÃ§Ã£o Pagador Invalido.');
 				}
 			}elseif($this->getIdentificacao_tipo_incricao_pagador() == '02') {
 				//verificando o tamanho do campo
 				if($this->valid_tamanho_campo($numero_inscricao_pagador, 14)) {
 					$this->numero_inscricao_pagador = $numero_inscricao_pagador;
 				}else {
-					throw new Exception('Error -  CNPJ do campo Numero Inscrição Pagador Invalido.');
+					throw new Exception('Error -  CNPJ do campo Numero InscriÃ§Ã£o Pagador Invalido.');
 				}
 			}else {
-				throw new Exception('Error -  O campo Numero Inscrição é invalido.');
+				throw new Exception('Error -  O campo Numero InscriÃ§Ã£o Ã© invalido.');
 			}
 		}else {
-			throw new Exception('Error -  O campo Numero Inscrição Pagador não é um numero.');
+			throw new Exception('Error -  O campo Numero InscriÃ§Ã£o Pagador nÃ£o Ã© um numero.');
 		}
 	}
 
@@ -890,9 +872,9 @@ class Detalhes extends Funcoes implements IFuncoes {
 		//adiciona brancos na string
 		$nome_pagador = $this->montar_branco($nome_pagador, 40, 'right');
 		//verifica a quantidade de caracteres
-		if($this->valid_tamanho_campo($nome_pagador, 40)) {
-			$this->nome_pagador = strtoupper($this->removeAccents($nome_pagador));
-		}else {
+		if($this->valid_tamanho_campo($nome_pagador, 40)) { 
+			$this->nome_pagador = $nome_pagador;
+		}else{
 			throw new Exception('Error - Nome do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
 		}
 	}
@@ -901,14 +883,30 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $endereco_pagador
 	 */
 	public function setEndereco_pagador($endereco_pagador) {
-		//preenchendo com brancos
-		$endereco_pagador = $this->montar_branco($endereco_pagador, 40, 'right');
+		//	die($endereco_pagador);
+			$tamanho = strlen($endereco_pagador);
+			if($tamanho > 40) {
 				
-		if($this->valid_tamanho_campo($endereco_pagador, 40)) {
-			$this->endereco_pagador = strtoupper($endereco_pagador);
-		}else {
-			throw new Exception('Error - Endereço do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
-		}
+				$endereco_pagador = $this->resume_texto($endereco_pagador, 39);
+				
+				$endereco_pagador = $this->montar_branco($endereco_pagador, 40, 'right');
+				
+				if($this->valid_tamanho_campo($endereco_pagador, 40)) {
+					$this->endereco_pagador = $endereco_pagador;
+				}else {
+					throw new Exception('Error - EndereÃ§o do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
+				}
+			}else {
+				
+				$endereco_pagador = $this->montar_branco($endereco_pagador, 40, 'right');
+				
+				if($this->valid_tamanho_campo($endereco_pagador, 40)) {
+						
+					$this->endereco_pagador = $endereco_pagador;
+				}else {
+					throw new Exception('Error - EndereÃ§o do pagador invalido, excedido o tamanho maximo de 40 caracteres.');
+				}
+			}
 	}
 
 	/**
@@ -929,7 +927,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $cep
 	 */
 	public function setCep($cep) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($cep)) {
 			//verificando o tamanho da string
 			if($this->valid_tamanho_campo($cep, 5)) {
@@ -938,7 +936,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error - Quantidade de caracteres do compo CEP invalidos.');
 			}
 		}else {
-			throw new Exception('Error - O campos CEP não é um numero.');
+			throw new Exception('Error - O campos CEP nï¿½o ï¿½ um numero.');
 		}
 	}
 
@@ -946,7 +944,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $sufixo_cep
 	 */
 	public function setSufixo_cep($sufixo_cep) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($sufixo_cep)) {
 			//verificando o tamanho da string
 			if($this->valid_tamanho_campo($sufixo_cep, 3)) {
@@ -955,14 +953,14 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error - Quantidade de caracteres do campo Sufixo invalidos.');
 			}
 		}else {
-			throw new Exception('Error - O campos Sufixo CEP não é um numero.');
+			throw new Exception('Error - O campos Sufixo CEP nï¿½o ï¿½ um numero.');
 		}
 	}
 
 	/**
-	 * Não utilizar as expressões 'taxa bancária' ou 'tarifa bancária' nos boletos de 
-	 * cobrança, pois essa tarifa refere-se à negociada pelo Banco com seu cliente 
-	 * beneficiário. Orientação da FEBRABAN (Comunicado FB-170/2005).
+	 * Nï¿½o utilizar as expressï¿½es 'taxa bancï¿½ria' ou 'tarifa bancï¿½ria' nos boletos de 
+	 * cobranï¿½a, pois essa tarifa refere-se ï¿½ negociada pelo Banco com seu cliente 
+	 * beneficiï¿½rio. Orientaï¿½ï¿½o da FEBRABAN (Comunicado FB-170/2005).
 	 * 
 	 * @param field_type $sacador_segunda_mensagem
 	 */
@@ -973,7 +971,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 		if($this->valid_tamanho_campo($sacador_segunda_mensagem, 60)) {
 			$this->sacador_segunda_mensagem = $sacador_segunda_mensagem;
 		}else {
-			throw new Exception('Error - Dados da segunda mensagem estão invalidos.');
+			throw new Exception('Error - Dados da segunda mensagem estï¿½o invalidos.');
 		}
 	}
 
@@ -981,7 +979,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $numero_sequencial_registro
 	 */
 	public function setNumero_sequencial_registro($numero_sequencial_registro) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($numero_sequencial_registro)) {
 			//completando com zeros na string
 			$numero_sequencial_registro = $this->add_zeros($numero_sequencial_registro, 6);
@@ -992,7 +990,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 				throw new Exception('Error - Quantidade de caracteres do campo Numero Sequencial Registro invalidos.');
 			}
 		}else {
-			throw new Exception('Error - O campos Numero Sequencial Registro não é um numero.');
+			throw new Exception('Error - O campos Numero Sequencial Registro nï¿½o ï¿½ um numero.');
 		}		
 	}
 
@@ -1000,16 +998,16 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @param field_type $carteira
 	 */
 	public function setCarteira($carteira) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($carteira)) {
 			$carteira = $this->add_zeros($carteira, 3);
 			if($this->valid_tamanho_campo($carteira, 3)) {
 				$this->carteira = $carteira;
 			}else {
-				throw new Exception('Error - Quantidade de caracteres do campo Carteira estão invalidos.');
+				throw new Exception('Error - Quantidade de caracteres do campo Carteira estï¿½o invalidos.');
 			}
 		}else {
-			throw new Exception('Error - O campos Carteira não é um numero.');
+			throw new Exception('Error - O campos Carteira nï¿½o ï¿½ um numero.');
 		}
 		
 	}
@@ -1023,13 +1021,15 @@ class Detalhes extends Funcoes implements IFuncoes {
 		//Montando a linha 
 		$linha = 
 			$this->getIdentificacao_registro() . //nao seta
-			$this->getAgencia_debito() . 
-			$this->getDigito_debito_debito() .  
-			$this->getRazao_conta_corrente() .  
-			$this->getConta_corrente().  
-			$this->getDigito_conta_corrente() .  
+			//opcional para pagador debito em conta corrente
+			$this->add_zeros('', 5) . 
+			$this->add_zeros('', 1) .  
+			$this->add_zeros('', 5) .  
+			$this->add_zeros('', 7) .  
+			$this->add_zeros('', 1) .  
+			//
 			$this->getIdentificacao_empresa_benificiario_banco() . 
-			$this->getNumero_controle_participante() .  
+			$this->montar_branco('', 25) .  
 			$this->getCodigo_banco_debito_compensacao() . 
 			$this->getCampo_multa() .  
 			$this->getPercentual_multa() . 
@@ -1071,6 +1071,4 @@ class Detalhes extends Funcoes implements IFuncoes {
 			return $this->valid_linha($linha);
 	}
 	
-
-
 }

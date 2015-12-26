@@ -74,29 +74,33 @@ class Arquivo {
 		//preenchendo dados dos detalhes
 		$detalhes = new Detalhes();
 		
+		//informações da conta
 		$detalhes->setAgencia_debito($boleto['agencia']);
 		$detalhes->setDigito_debito_debito($boleto['agencia_dv']);
-		$detalhes->setRazao_conta_corrente($boleto['razao_conta_corrente']);
 		$detalhes->setConta_corrente($boleto['conta']);
 		$detalhes->setDigito_conta_corrente($boleto['conta_dv']);
 		$detalhes->setCarteira($boleto['carteira']);
-		$detalhes->setNumero_controle_participante($boleto['numero_controle']);
+		
+		//informações do boleto
 		$detalhes->setCodigo_banco_debito_compensacao($boleto['habilitar_debito_compensacao']);
-		$detalhes->setCampo_multa($boleto['habilitar_multa']);
-		$detalhes->setPercentual_multa($boleto['percentual_multa']);
 		$detalhes->setIdentificacao_titulo_banco($boleto['nosso_numero']);
-		$detalhes->setDigito_auto_consferencia_bancaria($boleto['nosso_numero_dv']);
 		$detalhes->setDesconto_bonificacao_dia($boleto['desconto_dia']);
 		$detalhes->setIndicador_rateio_credito($boleto['rateio']);
 		$detalhes->setNumero_documento($boleto['numero_documento']);
 		$detalhes->setData_vencimento_titulo($boleto['vencimento']);
 		$detalhes->setValor_titulo($boleto['valor']);
 		$detalhes->setData_emissao_titulo($boleto['data_emissao_titulo']);
+		
+		//taxas do boleto
+		$detalhes->setCampo_multa($boleto['habilitar_multa']);
+		$detalhes->setPercentual_multa($boleto['percentual_multa']);
 		$detalhes->setValo_cobrado_dia_atraso($boleto['valor_dia_atraso']);
 		$detalhes->setData_limite_desconto($boleto['data_limite_desconto']);
 		$detalhes->setValor_desconto($boleto['valor_desconto']);
 		$detalhes->setValor_iof($boleto['valor_iof']);
 		$detalhes->setValor_abatimento_concedido_cancelado($boleto['valor_abatimento_concedido']);
+		
+		//informações do pagador
 		$detalhes->setIdentificacao_tipo_incricao_pagador($boleto['tipo_inscricao_pagador']);
 		$detalhes->setNumero_inscricao_pagador($boleto['numero_inscricao']);
 		$detalhes->setNome_pagador($boleto['nome_pagador']);
@@ -137,7 +141,7 @@ class Arquivo {
 			$detalhe->setNumero_sequencial_registro($numero_sequencial++);
 			$dados .= $detalhe->montar_linha() . self::QUEBRA_LINHA;
 		}
-		//montando rodap�
+		//montando rodap�
 		$trailler = new Trailler();
 		$trailler->setNumero_sequencial_regsitro($numero_sequencial++);
 		$this->setTrailler($trailler);

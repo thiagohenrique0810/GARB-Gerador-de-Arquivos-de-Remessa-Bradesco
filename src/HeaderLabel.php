@@ -1,14 +1,14 @@
 <?php
 /**
  * Lay-out do Arquivo-Remessa - Registro Header Label
- * Lay-out para Cobrança com Registro e sem Registro com Emissão do Boleto pelo 
+ * Lay-out para Cobranï¿½a com Registro e sem Registro com Emissï¿½o do Boleto pelo 
  * Banco ou pela Empresa
- * Descrição de Registro - Tamanho 400 Bytes
- * A - Alfanumérico - Conteúdo em Caixa Alta (Letras Maiúsculas)
- * N - Numérico
+ * Descriï¿½ï¿½o de Registro - Tamanho 400 Bytes
+ * A - Alfanumï¿½rico - Conteï¿½do em Caixa Alta (Letras Maiï¿½sculas)
+ * N - Numï¿½rico
  */
-require_once 'src/Funcoes.php';
-require_once 'src/IFuncoes.php';
+require_once 'Funcoes.php';
+require_once 'IFuncoes.php';
 
 class HeaderLabel extends Funcoes implements IFuncoes {
 	//001 - 001 - 1 -  N CONSTANTE
@@ -19,26 +19,26 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 	private $literal_remessa = 'REMESSA'; 		
 	//010 - 011 - 2 - N CONSTANTE
 	private $codigo_servico = '01';				
-	//012 - 026 - 15 - A CONSTANTE - COMPLETAR COM ESPAÇOS EM BRANCO A DIREITA
+	//012 - 026 - 15 - A CONSTANTE - COMPLETAR COM ESPAï¿½OS EM BRANCO A DIREITA
 	private $literal_servico = 'COBRANCA';		
 	//027 - 046 - 20 - N COMPLETAR COM ZEROS A ESQUERDA
-	private $codigo_empresa = ''; 				//<---- verificar observações
-	//047 - 076 - 30 - A - COMPLETAR COM ESPAÇOS EM BRANCO A DIREITA
+	private $codigo_empresa = ''; 				//<---- verificar observaï¿½ï¿½es
+	//047 - 076 - 30 - A - COMPLETAR COM ESPAï¿½OS EM BRANCO A DIREITA
 	private $nome_empresa = '';
 	//077 - 079 - 3 - N CONSTANTE
 	private $numero_bradesco_compensacao = 237;	
-	//080 - 094 - 15 - A CONSTANTE - COMPLETAR COM ESPAÇOES EM BRANCO A DIREITA
+	//080 - 094 - 15 - A CONSTANTE - COMPLETAR COM ESPAï¿½OES EM BRANCO A DIREITA
 	private $nome_banco = 'Bradesco';			
 	//095 - 100 - 6 - N
-	private $data_gravacao = ''; 				//<---- verificar observações
+	private $data_gravacao = ''; 				//<---- verificar observaï¿½ï¿½es
 	//101 - 108 - 8 - A
-	//CAMPO EM BRANCO COM 8 POSIÇÕES
+	//CAMPO EM BRANCO COM 8 POSIï¿½ï¿½ES
 	//109 - 110 - 2 - A
 	private $identificacao_sistema = 'MX';
 	//111 - 117 - 7 - N  - COMPLETAR COM ZEROS A ESQUERDA - DEVE SER AUTOINCREMENTADA +1 - VALOR UNICO PARA CADA NOVO ARQUIVO
 	private $numero_sequencial_remessa = '';
 	//118 - 394 - 277 - A
-	//CAMPO EM BRANCO COM 277 POSIÇÕES
+	//CAMPO EM BRANCO COM 277 POSIï¿½ï¿½ES
 	//395 - 400 - 6 - N CONSTANTE
 	private $numero_sequencial_regsitro = '000001';
 	
@@ -83,7 +83,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 		if(is_numeric($codigo_empresa)) {
 			$this->codigo_empresa = $this->add_zeros($codigo_empresa, 20);
 		}else {
-			throw new Exception('Error - Não é um numero');
+			throw new Exception('Error - Nï¿½o ï¿½ um numero');
 		}
 	}
 
@@ -107,7 +107,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 		if(is_numeric($data_gravacao)) {
 			$this->data_gravacao = $data_gravacao;
 		}else {
-			throw new Exception('Error - O campo data de gravação não é um numero.');
+			throw new Exception('Error - O campo data de gravaï¿½ï¿½o nï¿½o ï¿½ um numero.');
 		}
 	}
 	
@@ -115,7 +115,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 	 * @param string $numero_sequencial_remessa
 	 */
 	public function setNumero_sequencial_remessa($numero_sequencial_remessa) {
-		//verificando se é um numero
+		//verificando se ï¿½ um numero
 		if(is_numeric($numero_sequencial_remessa)) {
 			//completando a string com zeros
 			$numero_sequencial_remessa = $this->add_zeros($numero_sequencial_remessa, 7);
@@ -125,7 +125,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 				throw new Exception('Error - Tamanho de texto invalido, para o campo numero sequencial remessa.');
 			}
 		}else {
-			throw new Exception('Error - O campo numero sequencial remessa não é um numero.');
+			throw new Exception('Error - O campo numero sequencial remessa nï¿½o ï¿½ um numero.');
 		}
 	}
 	
@@ -134,7 +134,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 	 */
 	public function montar_linha() {
 		
-		//motando linha do cabeçalho da remessa
+		//motando linha do cabeï¿½alho da remessa
 			$linha = 	
 			$this->identificacao_registro 			.
 			$this->identificacao_arquivo_remessa 	.

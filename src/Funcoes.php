@@ -3,7 +3,7 @@
 class Funcoes {
 	
 	/**
-	 * metodo para montar uma string com espaços em branco
+	 * metodo para montar uma string com espaï¿½os em branco
 	 * @param unknown $string
 	 * @param unknown $tamanho
 	 * @param string $posicao
@@ -22,7 +22,7 @@ class Funcoes {
 				$result .= ' ' ;
 			}
 				
-			//verificando posição dos zeros
+			//verificando posiï¿½ï¿½o dos zeros
 			if($posicao == 'left') {
 				$result = $result . $string;
 			}elseif($posicao == 'right') {
@@ -31,7 +31,7 @@ class Funcoes {
 				
 			return $result;
 		}else {
-			throw new Exception('Error - tamanho da quantidade de espaços não especificado.');
+			throw new Exception('Error - tamanho da quantidade de espaï¿½os nï¿½o especificado.');
 		}
 	}
 	
@@ -55,7 +55,7 @@ class Funcoes {
 				$result .= '0' ; 
 			}
 			
-			//verificando posição dos zeros
+			//verificando posiï¿½ï¿½o dos zeros
 			if($posicao == 'left') {
 				$result = $result . $string;
 			}elseif($posicao == 'right') {
@@ -76,58 +76,51 @@ class Funcoes {
 	public function valid_linha($string) {
 		$return  = $this->removeAccents($string);
 		
-		//convertendo string para maiúscula
-		$return = strtoupper($return);
-
 		if ($this->valid_tamanho_campo($return, 400)) {
-			return $return;
+			//convertendo string para maiï¿½scula
+			return strtoupper($this->removeAccents($return));
 		}else {
-			throw new Exception('Erro - Informações de linha invalidas.');
+			//die($string);
+			throw new Exception('Erro - InformaÃ§Ãµes de linha invalidas.');
 		}
 	}
 	
 	
 	/**
 	 * metodo para remover acentos
-	 * @param unknown $string
-	 * @return mixed
+	 * @param unknown $value
+	 * @return string
 	 */
 	public function removeAccents($string, $slug = false)
 	{
-		$string = strtolower($string);
-
-		// Código ASCII das vogais
-		$ascii['a'] = range(224, 230);
-		$ascii['e'] = range(232, 235);
-		$ascii['i'] = range(236, 239);
-		$ascii['o'] = array_merge(range(242, 246), array(240, 248));
-		$ascii['u'] = range(249, 252);
-	
-		// Código ASCII dos outros caracteres
-		$ascii['b'] = array(223);
-		$ascii['c'] = array(231);
-		$ascii['d'] = array(208);
-		$ascii['n'] = array(241);
-		$ascii['y'] = array(253, 255);
-	
-		foreach ($ascii as $key=>$item) {
-			$acentos = '';
-			foreach ($item AS $codigo) $acentos .= chr($codigo);
-			$troca[$key] = '/['.$acentos.']/i';
-		}
-	
-		$string = preg_replace(array_values($troca), array_keys($troca), $string);
-	
-		// Slug?
-		if ($slug) {
-			// Troca tudo que não for letra ou número por um caractere ($slug)
-			$string = preg_replace('/[^a-z0-9]/i', $slug, $string);
-			// Tira os caracteres ($slug) repetidos
-			$string = preg_replace('/' . $slug . '{2,}/i', $slug, $string);
-			$string = trim($string, $slug);
-		}
-	
-		return $string;
+		// CÃ³digo ASCII das vogais
+	  $ascii['a'] = range(224, 230);
+	  $ascii['e'] = range(232, 235);
+	  $ascii['i'] = range(236, 239);
+	  $ascii['o'] = array_merge(range(242, 246), array(240, 248));
+	  $ascii['u'] = range(249, 252);
+	  // CÃ³digo ASCII dos outros caracteres
+	  $ascii['b'] = array(223);
+	  $ascii['c'] = array(231);
+	  $ascii['d'] = array(208);
+	  $ascii['n'] = array(241);
+	  $ascii['y'] = array(253, 255);
+	  foreach ($ascii as $key=>$item) {
+	    $acentos = '';
+	    foreach ($item AS $codigo) $acentos .= chr($codigo);
+	    $troca[$key] = '/['.$acentos.']/i';
+	  }
+	  $string = preg_replace(array_values($troca), array_keys($troca), $string);
+	  // Slug?
+	  if ($slug) {
+	    // Troca tudo que nÃ£o for letra ou nÃºmero por um caractere ($slug)
+	    $string = preg_replace('/[^a-z0-9]/i', $slug, $string);
+	    // Tira os caracteres ($slug) repetidos
+	    $string = preg_replace('/' . $slug . '{2,}/i', $slug, $string);
+	    $string = trim($string, $slug);
+	  }
+	  
+	  return $string;
 	}
 	
 	/**
@@ -153,7 +146,7 @@ class Funcoes {
 	}
 	
 	/**
-	 * metodo para remover formação de moedas: pontos e virgulas
+	 * metodo para remover formaï¿½ï¿½o de moedas: pontos e virgulas
 	 * @param unknown $valor
 	 * @return mixed|boolean
 	 */
@@ -164,7 +157,7 @@ class Funcoes {
 			
 			return $return;
 		}else {
-			throw new Exception('Error - O valor ' . $valor . ' não é um numero.');
+			throw new Exception('Error - O valor ' . $valor . ' nao eh um numero.');
 		}
 	}
 	
@@ -175,7 +168,7 @@ class Funcoes {
 	 */
 	public function validaCPF($cpf = null) {
 	
-		// Verifica se um número foi informado
+		// Verifica se um nï¿½mero foi informado
 		if(empty($cpf)) {
 			return false;
 		}
@@ -184,11 +177,11 @@ class Funcoes {
 		$cpf = preg_replace('[^0-9]', '', $cpf);
 		$cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
 		 
-		// Verifica se o numero de digitos informados é igual a 11
+		// Verifica se o numero de digitos informados ï¿½ igual a 11
 		if (strlen($cpf) != 11) {
 			return false;
 		}
-		// Verifica se nenhuma das sequências invalidas abaixo
+		// Verifica se nenhuma das sequï¿½ncias invalidas abaixo
 		// foi digitada. Caso afirmativo, retorna falso
 		else if ($cpf == '00000000000' ||
 				 $cpf == '11111111111' ||
@@ -202,7 +195,7 @@ class Funcoes {
 				 $cpf == '99999999999') {
 					return false;
 					// Calcula os digitos verificadores para verificar se o
-					// CPF é válido
+					// CPF ï¿½ vï¿½lido
 		} else {
 			 
 			for ($t = 9; $t < 11; $t++) {
@@ -218,5 +211,71 @@ class Funcoes {
 
 			return true;
 		}
+	}
+	
+	/**
+	 * retorna o digito verificador do nosso numero
+	 * @param unknown $nosso_numero
+	 * @return Ambigous <string, number>
+	 */
+	public function digito_verificador_nosso_numero($nosso_numero) {
+		$modulo = self::modulo11($nosso_numero, 7);
+		$digito = 11 - $modulo['resto'];
+	
+		if ($digito == 10) {
+			$dv = "P";
+		} elseif($digito == 11) {
+			$dv = 0;
+		} else {
+			$dv = $digito;
+		}
+	
+		return $dv;
+	}
+	
+	/**
+	 * calculo do modulo 11 do digito veirificador
+	 * @param unknown $num
+	 * @param number $base
+	 * @return multitype:number
+	 */
+	public static function modulo11($num, $base=9)
+	{
+		$fator = 2;
+		$soma  = 0;
+		// Separacao dos numeros.
+		for ($i = strlen($num); $i > 0; $i--) {
+			//  Pega cada numero isoladamente.
+			$numeros[$i] = substr($num,$i-1,1);
+			//  Efetua multiplicacao do numero pelo falor.
+			$parcial[$i] = $numeros[$i] * $fator;
+			//  Soma dos digitos.
+			$soma += $parcial[$i];
+			if ($fator == $base) {
+				//  Restaura fator de multiplicacao para 2.
+				$fator = 1;
+			}
+			$fator++;
+		}
+		$result = array(
+				'digito' => ($soma * 10) % 11,
+				// Remainder.
+				'resto'  => $soma % 11,
+		);
+		if ($result['digito'] == 10){
+			$result['digito'] = 0;
+		}
+		return $result;
+	}
+	
+	/**
+	 * metodo para resumir o texto
+	 * ESSA NÃƒO Ã‰ UMA FORMA IDEAL
+	 * @param unknown $string
+	 * @param unknown $tamanho
+	 * @return string
+	 */
+	public function resume_texto($string, $tamanho) {
+		return substr($string, 0, $tamanho);
 	}
 }
