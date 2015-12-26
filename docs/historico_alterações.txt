@@ -9,22 +9,22 @@
 		* Criação das pastas	- Concluido
 	# Criação das classes		- Concluido
 		* Arquivo				- Concluido
-		* Detalhes				- Desenvolvimento
-		* Funcoes				- Homologar
-		* HeaderLabel			- Homologar
-		* IFuncoes				- Desenvolvimento
-		* Trailler				- Homologar
+		* Detalhes				- Concluido
+		* Funcoes				- Concluido
+		* HeaderLabel			- Concluido
+		* IFuncoes				- Concluido
+		* Trailler				- Concluido
 2 - Testes
-	# Gerar arquivo de teste com um unico boleto 										- Não iniciado
-		* Criar plano de testes															- Não iniciado
-	# Gerar arquivo de teste com mais de um boleto										- Não iniciado
-		* Criar plano de testes															- Não iniciado
-	# Enviar para o banco																- Não iniciado
-		* Enviar arquivo de testes de um/ou mais boletos para o banco processar			- Não iniciado
-	# Aguardar retorno do processamento													- Não iniciado
-		* Aguardar retorno do processamento do arquivo acaso haja erros					- Não iniciado
-		* Homologar possiveis erros junto ao banco										- Não iniciado
-	# Gerar arquivo de retorno do banco													- Não iniciado
-		* Verificar se no arquivo consta todos os boletos gerados						- Não iniciado
-		* Conciliar informações do arquivo de remessa com o arquivo de retorno do banco	- Não iniciado
+	# Gerar arquivo de teste com um unico boleto 										- Concluido
+		* Criar plano de testes															- Concluido
+	# Gerar arquivo de teste com mais de um boleto										- Concluido
+		* Criar plano de testes															- Concluido
+	# Enviar para o banco																- Concluido
+		* Enviar arquivo de testes de um/ou mais boletos para o banco processar			- Concluido
+	# Aguardar retorno do processamento													- Concluido
+		* Aguardar retorno do processamento do arquivo acaso haja erros					- Concluido
+		* Homologar possiveis erros junto ao banco										- Concluido
+	# Gerar arquivo de retorno do banco													- Concluido
+		* Verificar se no arquivo consta todos os boletos gerados						- Concluido
+		* Conciliar informações do arquivo de remessa com o arquivo de retorno do banco	- Concluido
 	
