@@ -205,7 +205,7 @@ class Detalhes extends Funcoes implements IFuncoes {
 	 * @return the $digito_auto_consferencia_bancaria
 	 */
 	public function getDigito_auto_consferencia_bancaria() {
-		return $this->digito_verificador_nosso_numero($this->getIdentificacao_titulo_banco());
+		return $this->digito_verificador_nosso_numero($this->getCarteira() . $this->getIdentificacao_titulo_banco());
 	}
 
 	/**

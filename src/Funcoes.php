@@ -214,12 +214,16 @@ class Funcoes {
 	}
 	
 	/**
-	 * retorna o digito verificador do nosso numero
+	 * retorna o digito verificador do nosso numero com o numero da carteira
 	 * @param unknown $nosso_numero
 	 * @return Ambigous <string, number>
 	 */
 	public function digito_verificador_nosso_numero($nosso_numero) {
+	    //die($nosso_numero);
 		$modulo = self::modulo11($nosso_numero, 7);
+		
+		//die(print_r($modulo));
+		
 		$digito = 11 - $modulo['resto'];
 	
 		if ($digito == 10) {
@@ -239,7 +243,7 @@ class Funcoes {
 	 * @param number $base
 	 * @return multitype:number
 	 */
-	public static function modulo11($num, $base=9)
+	public static function modulo11( $num, $base=9)
 	{
 		$fator = 2;
 		$soma  = 0;
@@ -257,6 +261,7 @@ class Funcoes {
 			}
 			$fator++;
 		}
+		
 		$result = array(
 				'digito' => ($soma * 10) % 11,
 				// Remainder.
