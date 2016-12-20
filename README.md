@@ -24,19 +24,19 @@ processados todos os boletos de cobrança pelo banco.
 
  ###Exemplo de teste
  //REALIZANDO TESTES
-include 'src/Arquivo.php';
+ include 'src/Arquivo.php';
 
-//configurando o arquivo de remessa
-$config['codigo_empresa'] = '1234567';
-$config['razao_social'] = 'Agnetech Soluções empresariais';
-$config['numero_remessa'] = '2165';
-$config['data_gravacao'] = '280815';
+ //configurando o arquivo de remessa
+ $config['codigo_empresa'] = '1234567';
+ $config['razao_social'] = 'Agnetech Soluções empresariais';
+ $config['numero_remessa'] = '2165';
+ $config['data_gravacao'] = '280815';
 
-$arquivo = new Arquivo();
-//configurando remessa
-$arquivo->config($config);
+ $arquivo = new Arquivo();
+ //configurando remessa
+ $arquivo->config($config);
 
-for ($i = 0; $i < 20; $i++) {
+ for ($i = 0; $i < 20; $i++) {
 	//adicionando boleto
 	$boleto['agencia'] 						= '1800';
 	$boleto['agencia_dv'] 					= '7';
@@ -72,11 +72,11 @@ for ($i = 0; $i < 20; $i++) {
 	
 	//adicionando boleto
 	$arquivo->add_boleto($boleto);
-}
+ }
 
-$arquivo->setFilename('C:/Ampps/www/GARB---Gerador-de-Arquivos-de-Remessa-Bradesco/src/CB171101');
+ $arquivo->setFilename('C:/Ampps/www/GARB---Gerador-de-Arquivos-de-Remessa-Bradesco/src/CB171101');
 
-$arquivo->save();
+ $arquivo->save();
 
  ###Procedimentos do Banco
  Independentemente da quantidade de Arquivos Remessa transmitidos, referente a um único código 
