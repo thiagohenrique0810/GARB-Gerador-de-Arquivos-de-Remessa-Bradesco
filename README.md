@@ -22,8 +22,9 @@ processados todos os boletos de cobrança pelo banco.
  registros lhes convier. Os arquivos não devem em hipótese alguma seres compactados e sim 
  zonados, bem como os registros devem ser de acordo com as especificações do Lay-out.
 
+
  ###Exemplo de teste
- //REALIZANDO TESTES
+```PHP
  include 'src/Arquivo.php';
 
  //configurando o arquivo de remessa
@@ -77,7 +78,7 @@ processados todos os boletos de cobrança pelo banco.
  $arquivo->setFilename('C:/Ampps/www/GARB---Gerador-de-Arquivos-de-Remessa-Bradesco/src/CB171101');
 
  $arquivo->save();
-
+```
  ###Procedimentos do Banco
  Independentemente da quantidade de Arquivos Remessa transmitidos, referente a um único código 
  de Empresa (Pos. 27 a 46 Reg. Header Label), será gerado somente um arquivo retorno.
