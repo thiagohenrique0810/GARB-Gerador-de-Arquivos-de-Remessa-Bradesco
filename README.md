@@ -1,46 +1,102 @@
 # GARB---Gerador-de-Arquivos-de-Remessa-Bradesco
 Gerador de arquivos de remessa CNAB 400p para o banco Bradesco
 
-## IntroduÁ„o
-Essa biblioteca foi desenvolvida com a finalidade de ser integrada ao sistema de asseguradoras e
-cooperativas SAV, no qual tem como objetivo principal criar Arquivos de Remessa CNAB 400 posiÁıes Bradesco, para que seja
-processados todos os boletos de cobranÁa pelo banco.
+## Introdu√ß√£o
+Essa biblioteca foi desenvolvida com a finalidade de ser integrada ao sistema de seguradoras e
+associa√ß√µes de prote√ß√£o veicular Sistema SAV (www.sistemasav.com.br), no qual tem como objetivo principal criar Arquivos de Remessa CNAB 400 posi√ß√µes Bradesco, para que seja
+processados todos os boletos de cobran√ßa pelo banco.
 
-##DescriÁ„o do arquivo de remessa Formato CNAB
+##Descri√ß√£o do arquivo de remessa Formato CNAB
  - Registro 0 : Header Label
- - Registro 1 : TransaÁ„o
+ - Registro 1 : Transa√ß√£o
  - Registro 2 : Mensagem (opcional)
- - Registro 3 : Rateio de CrÈdito (opcional)
+ - Registro 3 : Rateio de Cr√©dito (opcional)
  - Registro 7 : Pagador Avalista (opcional)
  - Registro 9 : Trailler
  
- ##Procedimentos para criaÁ„o do arquivo e envio
+ ##Procedimentos para cria√ß√£o do arquivo e envio
  ###Procedimentos da Empresa
- Para a realizaÁ„o do teste, poder· ser transmitido quantos Arquivos Remessa lhes convier, 
- porÈm, gravados com todos os dados fictÌcios, exigidos no Lay-out, e dever· conter no m·ximo 
- 10 registros a vencer. ApÛs a oficializaÁ„o, os Arquivos Remessa poder„o conter quantos 
- registros lhes convier. Os arquivos n„o devem em hipÛtese alguma seres compactados e sim 
- zonados, bem como os registros devem ser de acordo com as especificaÁıes do Lay-out.
+ Para a realiza√ß√£o do teste, poder√° ser transmitido quantos Arquivos Remessa lhes convier, 
+ por√©m, gravados com todos os dados fict√≠cios, exigidos no Lay-out, e dever√° conter no m√°ximo 
+ 10 registros a vencer. Ap√≥s a oficializa√ß√£o, os Arquivos Remessa poder√£o conter quantos 
+ registros lhes convier. Os arquivos n√£o devem em hip√≥tese alguma seres compactados e sim 
+ zonados, bem como os registros devem ser de acordo com as especifica√ß√µes do Lay-out.
+
+ ###Exemplo de teste
+ //REALIZANDO TESTES
+include 'src/Arquivo.php';
+
+//configurando o arquivo de remessa
+$config['codigo_empresa'] = '1234567';
+$config['razao_social'] = 'Agnetech Solu√ß√µes empresariais';
+$config['numero_remessa'] = '2165';
+$config['data_gravacao'] = '280815';
+
+$arquivo = new Arquivo();
+//configurando remessa
+$arquivo->config($config);
+
+for ($i = 0; $i < 20; $i++) {
+	//adicionando boleto
+	$boleto['agencia'] 						= '1800';
+	$boleto['agencia_dv'] 					= '7';
+	$boleto['razao_conta_corrente']			= '1250';
+	$boleto['conta'] 						= '0018399';
+	$boleto['conta_dv'] 					= '7';
+	$boleto['identificacao_empresa'] 		= '6559654968';
+	$boleto['numero_controle'] 				= '5219';
+	$boleto['habilitar_debito_compensacao'] = true;
+	$boleto['habilitar_multa'] 				= true;
+	$boleto['percentual_multa'] 			= '5';
+	$boleto['nosso_numero'] 				= '61551964';
+	$boleto['nosso_numero_dv'] 				= 'P';
+	$boleto['desconto_dia']	 				= '0';
+	$boleto['rateio'] 						= false;
+	$boleto['numero_documento'] 			= '56541654';
+	$boleto['vencimento'] 					= '201115';
+	$boleto['valor'] 						= '1200';
+	$boleto['data_emissao_titulo'] 			= '161115';
+	$boleto['valor_dia_atraso'] 			= '0';
+	$boleto['data_limite_desconto'] 		= '201115';
+	$boleto['valor_desconto'] 				= '0';
+	$boleto['valor_iof'] 					= '0';
+	$boleto['valor_abatimento_concedido'] 	= '0';
+	$boleto['tipo_inscricao_pagador'] 		= 'CPF';
+	$boleto['numero_inscricao'] 			= '09191112322';
+	$boleto['nome_pagador'] 				= 'thiago henrique pequeno da silva';
+	$boleto['endereco_pagador'] 			= 'rua capitao lima, recife, pernambuco';
+	$boleto['primeira_mensagem'] 			= '';
+	$boleto['cep_pagador'] 					= '54100';
+	$boleto['sufixo_cep_pagador'] 			= '000';
+	$boleto['sacador_segunda_mensagem'] 	= '';
+	
+	//adicionando boleto
+	$arquivo->add_boleto($boleto);
+}
+
+$arquivo->setFilename('C:/Ampps/www/GARB---Gerador-de-Arquivos-de-Remessa-Bradesco/src/CB171101');
+
+$arquivo->save();
 
  ###Procedimentos do Banco
- Independentemente da quantidade de Arquivos Remessa transmitidos, referente a um ˙nico cÛdigo 
- de Empresa (Pos. 27 a 46 Reg. Header Label), ser· gerado somente um arquivo retorno.
-Mesmo que no dia anterior n„o tenha sido enviado nenhum Arquivo Remessa, ser· gerado um Arquivo 
-Retorno contendo as ocorrÍncias sobre os TÌtulos registrados anteriormente. Ex.: TÌtulos pagos, 
-baixados por decurso de prazo, com instruÁ„o de protesto, enviados para cartÛrio etc..
+ Independentemente da quantidade de Arquivos Remessa transmitidos, referente a um √∫nico c√≥digo 
+ de Empresa (Pos. 27 a 46 Reg. Header Label), ser√° gerado somente um arquivo retorno.
+Mesmo que no dia anterior n√£o tenha sido enviado nenhum Arquivo Remessa, ser√° gerado um Arquivo 
+Retorno contendo as ocorr√™ncias sobre os T√≠tulos registrados anteriormente. Ex.: T√≠tulos pagos, 
+baixados por decurso de prazo, com instru√ß√£o de protesto, enviados para cart√≥rio etc..
 
 ###Nome dos Arquivos Remessa 
-Bradesco Net Empresa/Webta: O Arquivo Remessa dever· ter a seguinte formataÁ„o:
+Bradesco Net Empresa/Webta: O Arquivo Remessa dever√° ter a seguinte formata√ß√£o:
 CBDDMM??.REM
-CB : CobranÁa Bradesco
-DD : O Dia geraÁ„o do arquivo
-MM : O MÍs da geraÁ„o do Arquivo
-?? : vari·veis alfanumÈrico-NumÈricas
+CB : Cobran√ßa Bradesco
+DD : O Dia gera√ß√£o do arquivo
+MM : O M√™s da gera√ß√£o do Arquivo
+?? : vari√°veis alfanum√©rico-Num√©ricas
 Ex.: 01, AB, A1 etc.
 
-.Rem : Extens„o do arquivo.
+.Rem : Extens√£o do arquivo.
 
 Exemplo: CB010501. REM ou CB0105AB. REM ou CB0105A1.REM
-Nota: Quando se tratar de arquivo remessa para teste, a extens„o dever· ser TST.
+Nota: Quando se tratar de arquivo remessa para teste, a extens√£o dever√° ser TST.
 
-Exemplo: CB010501. TST, o retorno ser· disponibilizado como CB010501. RST.
+Exemplo: CB010501. TST, o retorno ser√° disponibilizado como CB010501. RST.
