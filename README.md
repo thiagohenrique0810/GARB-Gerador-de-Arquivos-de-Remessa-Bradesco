@@ -64,7 +64,7 @@ processados todos os boletos de cobrança pelo banco.
 	$boleto['valor_abatimento_concedido'] 	= '0';
 	$boleto['tipo_inscricao_pagador'] 		= 'CPF';
 	$boleto['numero_inscricao'] 			= '09191112322';
-	$boleto['nome_pagador'] 				= 'thiago henrique pequeno da silva';
+	$boleto['nome_pagador'] 				= 'thiago henrique';
 	$boleto['endereco_pagador'] 			= 'rua capitao lima, recife, pernambuco';
 	$boleto['primeira_mensagem'] 			= '';
 	$boleto['cep_pagador'] 					= '54100';
